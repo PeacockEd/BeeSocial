@@ -1,0 +1,373 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		139B9E41DAE6B5A5B10E57F3 /* Pods_BeeSocial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB9171061B68E99C5FB8AC9E /* Pods_BeeSocial.framework */; };
+		B26034481CE7607C009BBF93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26034471CE7607C009BBF93 /* AppDelegate.swift */; };
+		B260344A1CE7607C009BBF93 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26034491CE7607C009BBF93 /* ViewController.swift */; };
+		B260344D1CE7607C009BBF93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B260344B1CE7607C009BBF93 /* Main.storyboard */; };
+		B260344F1CE7607C009BBF93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B260344E1CE7607C009BBF93 /* Assets.xcassets */; };
+		B26034521CE7607C009BBF93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B26034501CE7607C009BBF93 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		140E92F7F2DD163A6903F0BE /* Pods-BeeSocial.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeeSocial.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeeSocial/Pods-BeeSocial.release.xcconfig"; sourceTree = "<group>"; };
+		B26034441CE7607C009BBF93 /* BeeSocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeeSocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B26034471CE7607C009BBF93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B26034491CE7607C009BBF93 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B260344C1CE7607C009BBF93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B260344E1CE7607C009BBF93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B26034511CE7607C009BBF93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B26034531CE7607C009BBF93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB9171061B68E99C5FB8AC9E /* Pods_BeeSocial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeeSocial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1CBFEB493A6BF7327D11935 /* Pods-BeeSocial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeeSocial.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeeSocial/Pods-BeeSocial.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B26034411CE7607C009BBF93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				139B9E41DAE6B5A5B10E57F3 /* Pods_BeeSocial.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		55B8021F73EB4A9B82A15021 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E1CBFEB493A6BF7327D11935 /* Pods-BeeSocial.debug.xcconfig */,
+				140E92F7F2DD163A6903F0BE /* Pods-BeeSocial.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		60E779E8A357F974868E4371 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DB9171061B68E99C5FB8AC9E /* Pods_BeeSocial.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B260343B1CE7607C009BBF93 = {
+			isa = PBXGroup;
+			children = (
+				B26034461CE7607C009BBF93 /* BeeSocial */,
+				B26034451CE7607C009BBF93 /* Products */,
+				55B8021F73EB4A9B82A15021 /* Pods */,
+				60E779E8A357F974868E4371 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B26034451CE7607C009BBF93 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B26034441CE7607C009BBF93 /* BeeSocial.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B26034461CE7607C009BBF93 /* BeeSocial */ = {
+			isa = PBXGroup;
+			children = (
+				B26034471CE7607C009BBF93 /* AppDelegate.swift */,
+				B26034491CE7607C009BBF93 /* ViewController.swift */,
+				B260344B1CE7607C009BBF93 /* Main.storyboard */,
+				B260344E1CE7607C009BBF93 /* Assets.xcassets */,
+				B26034501CE7607C009BBF93 /* LaunchScreen.storyboard */,
+				B26034531CE7607C009BBF93 /* Info.plist */,
+			);
+			path = BeeSocial;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B26034431CE7607C009BBF93 /* BeeSocial */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B26034561CE7607C009BBF93 /* Build configuration list for PBXNativeTarget "BeeSocial" */;
+			buildPhases = (
+				DE60B417D6A588FE34F82C01 /* 📦 Check Pods Manifest.lock */,
+				B26034401CE7607C009BBF93 /* Sources */,
+				B26034411CE7607C009BBF93 /* Frameworks */,
+				B26034421CE7607C009BBF93 /* Resources */,
+				F8932E27F8AC02D9C6E66E33 /* 📦 Embed Pods Frameworks */,
+				8B87B4F5426FAA5F8E2CFD76 /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BeeSocial;
+			productName = BeeSocial;
+			productReference = B26034441CE7607C009BBF93 /* BeeSocial.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B260343C1CE7607C009BBF93 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Edward P. Kelly";
+				TargetAttributes = {
+					B26034431CE7607C009BBF93 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = B260343F1CE7607C009BBF93 /* Build configuration list for PBXProject "BeeSocial" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B260343B1CE7607C009BBF93;
+			productRefGroup = B26034451CE7607C009BBF93 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B26034431CE7607C009BBF93 /* BeeSocial */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B26034421CE7607C009BBF93 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B26034521CE7607C009BBF93 /* LaunchScreen.storyboard in Resources */,
+				B260344F1CE7607C009BBF93 /* Assets.xcassets in Resources */,
+				B260344D1CE7607C009BBF93 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8B87B4F5426FAA5F8E2CFD76 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BeeSocial/Pods-BeeSocial-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE60B417D6A588FE34F82C01 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F8932E27F8AC02D9C6E66E33 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BeeSocial/Pods-BeeSocial-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B26034401CE7607C009BBF93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B260344A1CE7607C009BBF93 /* ViewController.swift in Sources */,
+				B26034481CE7607C009BBF93 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B260344B1CE7607C009BBF93 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B260344C1CE7607C009BBF93 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B26034501CE7607C009BBF93 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B26034511CE7607C009BBF93 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B26034541CE7607C009BBF93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B26034551CE7607C009BBF93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B26034571CE7607C009BBF93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1CBFEB493A6BF7327D11935 /* Pods-BeeSocial.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = BeeSocial/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.epkelly.BeeSocial;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B26034581CE7607C009BBF93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 140E92F7F2DD163A6903F0BE /* Pods-BeeSocial.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = BeeSocial/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.epkelly.BeeSocial;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B260343F1CE7607C009BBF93 /* Build configuration list for PBXProject "BeeSocial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B26034541CE7607C009BBF93 /* Debug */,
+				B26034551CE7607C009BBF93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B26034561CE7607C009BBF93 /* Build configuration list for PBXNativeTarget "BeeSocial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B26034571CE7607C009BBF93 /* Debug */,
+				B26034581CE7607C009BBF93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B260343C1CE7607C009BBF93 /* Project object */;
+}
