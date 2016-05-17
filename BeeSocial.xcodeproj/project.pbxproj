@@ -13,6 +13,12 @@
 		B260344D1CE7607C009BBF93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B260344B1CE7607C009BBF93 /* Main.storyboard */; };
 		B260344F1CE7607C009BBF93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B260344E1CE7607C009BBF93 /* Assets.xcassets */; };
 		B26034521CE7607C009BBF93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B26034501CE7607C009BBF93 /* LaunchScreen.storyboard */; };
+		B2E4E2DF1CE8E5D100E98631 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E4E2DE1CE8E5D100E98631 /* AppConstants.swift */; };
+		B2F4A09B1CE8E54A0005A783 /* KeysConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F4A09A1CE8E54A0005A783 /* KeysConstants.swift */; };
+		B2F654561CEAA99700090D9C /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F654551CEAA99700090D9C /* MaterialView.swift */; };
+		B2F654581CEAAE5E00090D9C /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F654571CEAAE5E00090D9C /* AppUtils.swift */; };
+		B2F6545A1CEAAF0900090D9C /* MaterialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F654591CEAAF0900090D9C /* MaterialButton.swift */; };
+		B2F6545C1CEAB21A00090D9C /* MaterialTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F6545B1CEAB21A00090D9C /* MaterialTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,12 @@
 		B260344E1CE7607C009BBF93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B26034511CE7607C009BBF93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B26034531CE7607C009BBF93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2E4E2DE1CE8E5D100E98631 /* AppConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		B2F4A09A1CE8E54A0005A783 /* KeysConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeysConstants.swift; sourceTree = "<group>"; };
+		B2F654551CEAA99700090D9C /* MaterialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
+		B2F654571CEAAE5E00090D9C /* AppUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
+		B2F654591CEAAF0900090D9C /* MaterialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialButton.swift; sourceTree = "<group>"; };
+		B2F6545B1CEAB21A00090D9C /* MaterialTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialTextField.swift; sourceTree = "<group>"; };
 		DB9171061B68E99C5FB8AC9E /* Pods_BeeSocial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeeSocial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1CBFEB493A6BF7327D11935 /* Pods-BeeSocial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeeSocial.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeeSocial/Pods-BeeSocial.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +90,10 @@
 		B26034461CE7607C009BBF93 /* BeeSocial */ = {
 			isa = PBXGroup;
 			children = (
+				B2F4A0991CE8E5350005A783 /* Utils */,
+				B2F4A0981CE8E23A0005A783 /* Model */,
+				B2F4A0961CE8E2280005A783 /* View */,
+				B2F4A0971CE8E22F0005A783 /* Controller */,
 				B26034471CE7607C009BBF93 /* AppDelegate.swift */,
 				B26034491CE7607C009BBF93 /* ViewController.swift */,
 				B260344B1CE7607C009BBF93 /* Main.storyboard */,
@@ -86,6 +102,40 @@
 				B26034531CE7607C009BBF93 /* Info.plist */,
 			);
 			path = BeeSocial;
+			sourceTree = "<group>";
+		};
+		B2F4A0961CE8E2280005A783 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B2F654551CEAA99700090D9C /* MaterialView.swift */,
+				B2F654591CEAAF0900090D9C /* MaterialButton.swift */,
+				B2F6545B1CEAB21A00090D9C /* MaterialTextField.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		B2F4A0971CE8E22F0005A783 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		B2F4A0981CE8E23A0005A783 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		B2F4A0991CE8E5350005A783 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B2F4A09A1CE8E54A0005A783 /* KeysConstants.swift */,
+				B2E4E2DE1CE8E5D100E98631 /* AppConstants.swift */,
+				B2F654571CEAAE5E00090D9C /* AppUtils.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,7 +261,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B260344A1CE7607C009BBF93 /* ViewController.swift in Sources */,
+				B2F6545A1CEAAF0900090D9C /* MaterialButton.swift in Sources */,
+				B2F6545C1CEAB21A00090D9C /* MaterialTextField.swift in Sources */,
 				B26034481CE7607C009BBF93 /* AppDelegate.swift in Sources */,
+				B2F654561CEAA99700090D9C /* MaterialView.swift in Sources */,
+				B2F654581CEAAE5E00090D9C /* AppUtils.swift in Sources */,
+				B2F4A09B1CE8E54A0005A783 /* KeysConstants.swift in Sources */,
+				B2E4E2DF1CE8E5D100E98631 /* AppConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

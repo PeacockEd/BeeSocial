@@ -3,12 +3,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Log In-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BeeSocial" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="Log In" customClass="ViewController" customModule="BeeSocial" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +17,151 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41W-XC-M2B">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="125"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In / Sign Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LuC-fZ-1i8">
+                                        <rect key="frame" x="26" y="46" width="171" height="26.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
+                                        <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.75686274509803919" blue="0.027450980392156862" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="LuC-fZ-1i8" firstAttribute="top" secondItem="41W-XC-M2B" secondAttribute="topMargin" constant="38" id="f4X-48-hYt"/>
+                                    <constraint firstAttribute="height" constant="125" id="sao-bB-aSX"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wqk-Dm-79I" customClass="MaterialView" customModule="BeeSocial" customModuleProvider="target">
+                                <rect key="frame" x="20" y="80" width="560" height="145"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="Xig-06-Ug5">
+                                        <rect key="frame" x="28" y="8" width="504" height="129"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fbLogo" translatesAutoresizingMaskIntoConstraints="NO" id="ZPw-Ug-jqo">
+                                                <rect key="frame" x="0.0" y="30" width="70" height="70"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="70" id="OeL-Cy-sgN"/>
+                                                    <constraint firstAttribute="height" constant="70" id="sTp-Ok-ivL"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sGH-gc-Bd1" customClass="MaterialButton" customModule="BeeSocial" customModuleProvider="target">
+                                                <rect key="frame" x="105" y="48" width="399" height="34"/>
+                                                <color key="backgroundColor" red="0.10588235294117647" green="0.44705882352941179" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="FACEBOOK LOGIN"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Xig-06-Ug5" firstAttribute="top" secondItem="Wqk-Dm-79I" secondAttribute="topMargin" id="Dei-WH-ijU"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="Xig-06-Ug5" secondAttribute="bottom" id="EBa-YS-e9a"/>
+                                    <constraint firstAttribute="height" constant="145" id="KDI-Xq-57f"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Xig-06-Ug5" secondAttribute="trailing" constant="20" id="Kz8-bd-TaQ"/>
+                                    <constraint firstItem="Xig-06-Ug5" firstAttribute="leading" secondItem="Wqk-Dm-79I" secondAttribute="leadingMargin" constant="20" id="uf6-kY-SHC"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="awN-Mc-WsS" customClass="MaterialView" customModule="BeeSocial" customModuleProvider="target">
+                                <rect key="frame" x="20" y="250" width="560" height="330"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Login / Sign Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7W-Xk-BM1">
+                                        <rect key="frame" x="8" y="8" width="220" height="27"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
+                                        <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pdn-xY-fNS" customClass="MaterialTextField" customModule="BeeSocial" customModuleProvider="target">
+                                        <rect key="frame" x="13" y="63" width="534" height="36"/>
+                                        <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="iMS-wY-CBI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nr2-HR-JEX" customClass="MaterialTextField" customModule="BeeSocial" customModuleProvider="target">
+                                        <rect key="frame" x="13" y="127" width="534" height="36"/>
+                                        <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="O4n-XM-d7s"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fx9-uV-6Gl" customClass="MaterialButton" customModule="BeeSocial" customModuleProvider="target">
+                                        <rect key="frame" x="169" y="213" width="222" height="34"/>
+                                        <color key="backgroundColor" red="1" green="0.75686274509803919" blue="0.027450980392156862" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="222" id="2Ad-2M-Qzr"/>
+                                            <constraint firstAttribute="height" constant="34" id="N7F-5n-mwz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Login / Signup">
+                                            <color key="titleColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Pdn-xY-fNS" firstAttribute="leading" secondItem="awN-Mc-WsS" secondAttribute="leading" constant="13" id="5O8-rT-mAH"/>
+                                    <constraint firstItem="z7W-Xk-BM1" firstAttribute="leading" secondItem="awN-Mc-WsS" secondAttribute="leading" constant="8" id="6QO-tS-Dkc"/>
+                                    <constraint firstItem="Nr2-HR-JEX" firstAttribute="top" secondItem="Pdn-xY-fNS" secondAttribute="bottom" constant="28" id="Byy-Sz-cZ5"/>
+                                    <constraint firstItem="Fx9-uV-6Gl" firstAttribute="top" secondItem="Nr2-HR-JEX" secondAttribute="bottom" constant="50" id="Ds8-Gv-1Nl"/>
+                                    <constraint firstItem="Nr2-HR-JEX" firstAttribute="leading" secondItem="awN-Mc-WsS" secondAttribute="leading" constant="13" id="NUb-9h-cFv"/>
+                                    <constraint firstItem="z7W-Xk-BM1" firstAttribute="top" secondItem="awN-Mc-WsS" secondAttribute="top" constant="8" id="Tv9-BU-Fyi"/>
+                                    <constraint firstItem="Pdn-xY-fNS" firstAttribute="top" secondItem="z7W-Xk-BM1" secondAttribute="bottom" constant="28" id="YVy-yd-1tX"/>
+                                    <constraint firstAttribute="trailing" secondItem="Nr2-HR-JEX" secondAttribute="trailing" constant="13" id="gUm-QM-4br"/>
+                                    <constraint firstAttribute="trailing" secondItem="Pdn-xY-fNS" secondAttribute="trailing" constant="13" id="ywd-Nd-Pg1"/>
+                                    <constraint firstItem="Fx9-uV-6Gl" firstAttribute="centerX" secondItem="awN-Mc-WsS" secondAttribute="centerX" id="zdR-Oj-ajk"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Wqk-Dm-79I" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="7AO-8K-GhW"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="awN-Mc-WsS" secondAttribute="bottom" constant="20" id="Fgb-X1-UTa"/>
+                            <constraint firstItem="awN-Mc-WsS" firstAttribute="top" secondItem="Wqk-Dm-79I" secondAttribute="bottom" constant="25" id="NxP-cC-rIr"/>
+                            <constraint firstItem="awN-Mc-WsS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Pg4-De-g6A"/>
+                            <constraint firstItem="Wqk-Dm-79I" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="bC0-pD-OGZ"/>
+                            <constraint firstItem="Wqk-Dm-79I" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="c73-TV-E6L"/>
+                            <constraint firstItem="41W-XC-M2B" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="cVJ-DS-ihe"/>
+                            <constraint firstAttribute="trailing" secondItem="41W-XC-M2B" secondAttribute="trailing" id="gvt-FG-D6X"/>
+                            <constraint firstItem="41W-XC-M2B" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="j9T-zS-1qQ"/>
+                            <constraint firstItem="awN-Mc-WsS" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="oLl-BX-HJi"/>
+                            <constraint firstItem="LuC-fZ-1i8" firstAttribute="leading" secondItem="Wqk-Dm-79I" secondAttribute="leading" constant="6" id="zV1-Ja-eFy"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="305" y="352"/>
+        </scene>
+        <!--Posts-->
+        <scene sceneID="rug-D2-PzB">
+            <objects>
+                <viewController id="Vah-m7-oQl" userLabel="Posts" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MDJ-S8-tDR"/>
+                        <viewControllerLayoutGuide type="bottom" id="oUl-x3-mM6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qeT-9u-P9m">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="stv-Df-4Mj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1044" y="352"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="fbLogo" width="65" height="65"/>
+    </resources>
 </document>
