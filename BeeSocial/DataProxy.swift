@@ -13,10 +13,12 @@ class DataProxy {
     
     static let instance = DataProxy()
     
-    private var _BASE_FB_REF = Firebase(url: "https://beesocial.firebaseio.com")
+    //private var _BASE_FB_REF = Firebase(url: "https://beesocial.firebaseio.com")
     
+    /*
     var BASE_FB_REF: Firebase
     {
         return _BASE_FB_REF
     }
+    */
 }

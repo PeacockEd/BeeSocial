@@ -12,6 +12,7 @@ Thumbs.db
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 xcuserdata
 # KeysConstants.swift
+Pods
 
 ## Build generated
 build/

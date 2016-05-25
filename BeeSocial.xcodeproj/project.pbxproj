@@ -24,6 +24,7 @@
 		B2F6545C1CEAB21A00090D9C /* MaterialTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F6545B1CEAB21A00090D9C /* MaterialTextField.swift */; };
 		B2FF66A51CEE650F004DBE51 /* PostsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF66A41CEE650F004DBE51 /* PostsVC.swift */; };
 		B2FF66A71CEE678E004DBE51 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF66A61CEE678E004DBE51 /* PostCell.swift */; };
+		EEF0ACA61CF4E063002A346B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF0ACA51CF4E063002A346B /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		B2FF66A61CEE678E004DBE51 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		DB9171061B68E99C5FB8AC9E /* Pods_BeeSocial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeeSocial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1CBFEB493A6BF7327D11935 /* Pods-BeeSocial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeeSocial.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeeSocial/Pods-BeeSocial.debug.xcconfig"; sourceTree = "<group>"; };
+		EEF0ACA51CF4E063002A346B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 		B260343B1CE7607C009BBF93 = {
 			isa = PBXGroup;
 			children = (
+				EEF0ACA51CF4E063002A346B /* GoogleService-Info.plist */,
 				B26034461CE7607C009BBF93 /* BeeSocial */,
 				B26034451CE7607C009BBF93 /* Products */,
 				55B8021F73EB4A9B82A15021 /* Pods */,
@@ -223,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B26034521CE7607C009BBF93 /* LaunchScreen.storyboard in Resources */,
+				EEF0ACA61CF4E063002A346B /* GoogleService-Info.plist in Resources */,
 				B260344F1CE7607C009BBF93 /* Assets.xcassets in Resources */,
 				B260344D1CE7607C009BBF93 /* Main.storyboard in Resources */,
 			);
