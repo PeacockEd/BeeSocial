@@ -9,7 +9,17 @@
 import Foundation
 import UIKit
 
-let KEY_UID = "uid"
+// FireBase Key Names
+struct MessageFields {
+    static let posts = "posts"
+    static let users = "users"
+    static let description = "description"
+    static let imageUrl = "imageUrl"
+    static let likes = "likes"
+    static let username = "username"
+}
+
+// UI Helpers
 let SHADOW_COLOR: CGFloat = 157.0 / 255.0
 
 // Firebase Login Error Conditions
@@ -18,6 +28,9 @@ let LOGIN_INVALID_EMAIL = -5
 let LOGIN_INVALID_PASSWORD = 17009
 let LOGIN_GENERIC_ERROR = -254
 let LOGIN_CREATE_USER_ERROR = -9254
+
+// Firebase Data Error Conditions
+let DATA_UNEXPECTED_FORMAT_ERROR = "dataUnexpectedFormatError"
 
 // Data Types
 typealias AuthResponse = AuthResult<Bool, Int>

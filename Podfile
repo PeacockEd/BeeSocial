@@ -8,4 +8,6 @@ target 'BeeSocial' do
   pod 'Firebase/Database'
   pod ‘Firebase/Auth’
 
+  pod 'Alamofire', '3.2.1'
+
 end

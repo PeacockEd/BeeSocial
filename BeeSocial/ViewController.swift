@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     {
         super.viewDidAppear(animated)
         
-        if loginManager.isCachedUser() {
+        if loginManager.userExists() {
             performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
         }
     }

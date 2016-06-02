@@ -36,7 +36,6 @@ class LoginManager: NSObject {
             } else {
                 if let user = user {
                     print("*** USER ALREADY EXISTED AND USER LOGGED IN: \(user.uid)")
-                    NSUserDefaults.standardUserDefaults().setValue("\(user.uid)", forKey: KEY_UID)
                     result = AuthResponse.Success(true)
                 }
             }
@@ -51,7 +50,6 @@ class LoginManager: NSObject {
                 self.delegate?.onCreateUserResult(AuthResponse.Failure(LOGIN_CREATE_USER_ERROR))
             } else {
                 if let user = user {
-                    NSUserDefaults.standardUserDefaults().setValue(user.uid, forKey: KEY_UID)
                     print("*** USER CREATED AND LOGGED IN: \(user.uid)")
                     self.delegate?.onCreateUserResult(AuthResponse.Success(true))
                 }
@@ -59,9 +57,9 @@ class LoginManager: NSObject {
         }
     }
     
-    func isCachedUser() -> Bool
+    func userExists() -> Bool
     {
-        if let _ = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) {
+        if let _ = FIRAuth.auth()?.currentUser {
             return true
         }
         return false
