@@ -162,12 +162,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Wp-HZ-nP7" customClass="MaterialView" customModule="BeeSocial" customModuleProvider="target">
+                                <rect key="frame" x="20" y="72" width="560" height="53"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LtG-tA-mUp">
+                                        <rect key="frame" x="8" y="8" width="544" height="37"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ix8-3O-S9o" customClass="MaterialTextField" customModule="BeeSocial" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="447" height="37"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="J2i-K6-DbN">
+                                                <rect key="frame" x="452" y="0.0" width="37" height="37"/>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="37" id="0rY-CB-VXk"/>
+                                                    <constraint firstAttribute="height" constant="37" id="Jmf-Si-mxf"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="rgd-wr-c5k" appends="YES" id="kfB-bE-MVC"/>
+                                                </connections>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6E-rJ-9ZW" customClass="MaterialButton" customModule="BeeSocial" customModuleProvider="target">
+                                                <rect key="frame" x="494" y="0.0" width="50" height="37"/>
+                                                <color key="backgroundColor" red="1" green="0.43529411764705883" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="Spc-wM-85T"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                <state key="normal" title="POST">
+                                                    <color key="titleColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onTapPost:" destination="C9B-3W-8vg" eventType="touchUpInside" id="7x2-k0-Fva"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailingMargin" secondItem="LtG-tA-mUp" secondAttribute="trailing" id="0en-iq-64T"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="LtG-tA-mUp" secondAttribute="bottom" id="8Yl-CP-mKH"/>
+                                    <constraint firstItem="LtG-tA-mUp" firstAttribute="leading" secondItem="7Wp-HZ-nP7" secondAttribute="leadingMargin" id="oQP-lM-tSj"/>
+                                    <constraint firstItem="LtG-tA-mUp" firstAttribute="top" secondItem="7Wp-HZ-nP7" secondAttribute="topMargin" id="qJJ-tf-mgR"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="373" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ViH-1N-f1u">
-                                <rect key="frame" x="20" y="64" width="560" height="536"/>
+                                <rect key="frame" x="20" y="133" width="560" height="467"/>
                                 <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="373" id="TWc-hv-KWq" customClass="PostCell" customModule="BeeSocial" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="560" height="373"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" id="TWc-hv-KWq" customClass="PostCell" customModule="BeeSocial" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="560" height="373"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TWc-hv-KWq" id="irT-Tr-Tcx">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="373"/>
@@ -190,7 +237,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="PeacockEd254" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="But-wc-dc1">
-                                                                            <rect key="frame" x="132" y="0.0" width="118" height="50"/>
+                                                                            <rect key="frame" x="131" y="0.0" width="118" height="50"/>
                                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                                                             <color key="textColor" red="1" green="0.42745098039215684" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -205,13 +252,13 @@
                                                                             <rect key="frame" x="499" y="0.0" width="45" height="50"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="1567" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hLQ-Vn-kd6">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="26"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="26.5"/>
                                                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                                                                     <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" text="LIKES" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q83-S7-av5">
-                                                                                    <rect key="frame" x="0.0" y="24" width="45" height="26"/>
+                                                                                    <rect key="frame" x="0.0" y="24" width="45" height="25.5"/>
                                                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                                                     <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <nil key="highlightedColor"/>
@@ -267,16 +314,26 @@
                         <constraints>
                             <constraint firstItem="ViH-1N-f1u" firstAttribute="trailing" secondItem="tSd-jb-9mi" secondAttribute="trailingMargin" id="5Ni-1j-AaV"/>
                             <constraint firstItem="SZc-I7-Iqj" firstAttribute="top" secondItem="ViH-1N-f1u" secondAttribute="bottom" id="CpU-qZ-OKF"/>
+                            <constraint firstItem="7Wp-HZ-nP7" firstAttribute="trailing" secondItem="tSd-jb-9mi" secondAttribute="trailingMargin" id="DIN-jO-G5F"/>
+                            <constraint firstItem="7Wp-HZ-nP7" firstAttribute="top" secondItem="nUr-HQ-YQL" secondAttribute="bottom" constant="8" id="Dth-tp-Tp0"/>
                             <constraint firstItem="ViH-1N-f1u" firstAttribute="leading" secondItem="tSd-jb-9mi" secondAttribute="leadingMargin" id="U9F-6l-LUr"/>
-                            <constraint firstItem="ViH-1N-f1u" firstAttribute="top" secondItem="nUr-HQ-YQL" secondAttribute="bottom" id="ouQ-4Q-9ZZ"/>
+                            <constraint firstItem="7Wp-HZ-nP7" firstAttribute="leading" secondItem="tSd-jb-9mi" secondAttribute="leadingMargin" id="a28-qS-fq4"/>
+                            <constraint firstItem="ViH-1N-f1u" firstAttribute="top" secondItem="7Wp-HZ-nP7" secondAttribute="bottom" constant="8" id="j2j-eU-beH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2U2-Ih-8JN"/>
                     <connections>
+                        <outlet property="postTextField" destination="Ix8-3O-S9o" id="e4n-No-xGj"/>
+                        <outlet property="selectImageIcon" destination="J2i-K6-DbN" id="u5Q-XL-maT"/>
                         <outlet property="tableView" destination="ViH-1N-f1u" id="RJ8-gw-PDR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8NM-yn-icQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="rgd-wr-c5k">
+                    <connections>
+                        <action selector="onTapSelectImage:" destination="C9B-3W-8vg" id="vuc-py-PeV"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1799" y="352"/>
         </scene>
@@ -301,6 +358,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="camera" width="50" height="50"/>
         <image name="fbLogo" width="65" height="65"/>
         <image name="heart_no" width="150" height="147"/>
         <image name="peacockEd" width="373" height="373"/>

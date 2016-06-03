@@ -9,12 +9,18 @@
 import UIKit
 import FirebaseDatabase
 
-class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
+        UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var postTextField: MaterialTextField!
+    @IBOutlet weak var selectImageIcon: UIImageView!
+    
     private var ref:FIRDatabaseReference!
     private var refHandle:FIRDatabaseHandle?
+    static var postImagesCache = NSCache()
     
+    private var imagePicker:UIImagePickerController!
     private var postData = [PostItem]()
     
     
@@ -24,6 +30,10 @@ class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.estimatedRowHeight = 373
+        
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
         
         ref = FIRDatabase.database().reference()
     }
@@ -64,11 +74,46 @@ class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
+        let post = postData[indexPath.row]
+        
         if let cell = tableView.dequeueReusableCellWithIdentifier("PostCell") as? PostCell {
-            cell.configureCell(withPost: postData[indexPath.row])
+            
+            var image:UIImage?
+            if let url = post.imageUrl {
+                image = PostsVC.postImagesCache.objectForKey(url) as? UIImage
+            }
+            cell.configureCell(withPost: post, withImage: image)
+            
             return cell
         } else {
             return PostCell()
         }
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        if postData[indexPath.row].imageUrl == nil {
+            return 158
+        }
+        return tableView.estimatedRowHeight
+    }
+    
+    @IBAction func onTapPost(sender: AnyObject)
+    {
+        
+    }
+    
+    @IBAction func onTapSelectImage(sender: AnyObject)
+    {
+        presentViewController(imagePicker, animated: true, completion: nil)
+    }
+}
+
+extension PostsVC {
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?)
+    {
+        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+        selectImageIcon.image = image
     }
 }
