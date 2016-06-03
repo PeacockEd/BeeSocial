@@ -22,7 +22,7 @@ class LoginManager: NSObject {
     func authenticateUser(email: String, password pwd:String)
     {
         FIRAuth.auth()?.signInWithEmail(email, password: pwd) { user, error in
-            var result:AuthResponse = AuthResponse.Failure(LOGIN_GENERIC_ERROR)
+            var result:AuthResponse?
             if error != nil {
                 print(error.debugDescription)
                 switch(error!.code) {
@@ -33,13 +33,19 @@ class LoginManager: NSObject {
                 default:
                     result = AuthResponse.Failure(LOGIN_GENERIC_ERROR)
                 }
+                if let result = result {
+                    self.delegate?.onAuthenticationResult(result)
+                }
             } else {
                 if let user = user {
                     print("*** USER ALREADY EXISTED AND USER LOGGED IN: \(user.uid)")
+                    print(user.displayName)
                     result = AuthResponse.Success(true)
+                    self.signedIn(user) {
+                        self.delegate?.onAuthenticationResult(result!)
+                    }
                 }
             }
-            self.delegate?.onAuthenticationResult(result)
         }
     }
     
@@ -51,15 +57,43 @@ class LoginManager: NSObject {
             } else {
                 if let user = user {
                     print("*** USER CREATED AND LOGGED IN: \(user.uid)")
-                    self.delegate?.onCreateUserResult(AuthResponse.Success(true))
+                    self.setDisplayName(user) {
+                        self.delegate?.onCreateUserResult(AuthResponse.Success(true))
+                    }
                 }
             }
         }
     }
     
+    private func setDisplayName(user: FIRUser, completionHandler handler: () -> ())
+    {
+        let changeRequest = user.profileChangeRequest()
+        changeRequest.displayName = user.email?.componentsSeparatedByString("@")[0] ?? "New User"
+        changeRequest.commitChangesWithCompletion { error in
+            guard error == nil else {
+                return
+            }
+            self.signedIn(user, completionHandler: handler)
+        }
+    }
+    
+    private func signedIn(user: FIRUser, completionHandler handler: (() -> ())?)
+    {
+        AppState.sharedInstance.displayName = user.displayName ?? user.email
+        if handler != nil {
+            handler!()
+        }
+    }
+    
     func userExists() -> Bool
     {
-        if let _ = FIRAuth.auth()?.currentUser {
+//        do {
+//            try FIRAuth.auth()?.signOut()
+//        } catch let error as NSError {
+//            print(error)
+//        }
+        if let user = FIRAuth.auth()?.currentUser {
+            signedIn(user, completionHandler: nil)
             return true
         }
         return false

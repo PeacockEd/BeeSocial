@@ -309,20 +309,51 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hF8-sc-V9L" customClass="LoadingIndicatorView" customModule="BeeSocial" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="O2h-Hx-5ge">
+                                        <rect key="frame" x="290" y="290" width="20" height="20"/>
+                                        <color key="color" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTh-cR-RNe">
+                                        <rect key="frame" x="262" y="318" width="76" height="20"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="O2h-Hx-5ge" firstAttribute="centerX" secondItem="hF8-sc-V9L" secondAttribute="centerX" id="8YR-WV-wOg"/>
+                                    <constraint firstItem="zTh-cR-RNe" firstAttribute="top" secondItem="O2h-Hx-5ge" secondAttribute="bottom" constant="8" id="OES-gS-pac"/>
+                                    <constraint firstItem="zTh-cR-RNe" firstAttribute="centerX" secondItem="hF8-sc-V9L" secondAttribute="centerX" id="P0s-hN-Phx"/>
+                                    <constraint firstItem="O2h-Hx-5ge" firstAttribute="centerY" secondItem="hF8-sc-V9L" secondAttribute="centerY" id="xXI-FV-gK5"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="spinner" destination="O2h-Hx-5ge" id="sho-og-1ta"/>
+                                    <outlet property="statusLabel" destination="zTh-cR-RNe" id="cOf-t5-Zb3"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ViH-1N-f1u" firstAttribute="trailing" secondItem="tSd-jb-9mi" secondAttribute="trailingMargin" id="5Ni-1j-AaV"/>
+                            <constraint firstItem="hF8-sc-V9L" firstAttribute="leading" secondItem="tSd-jb-9mi" secondAttribute="leading" id="9r0-Y4-IOq"/>
                             <constraint firstItem="SZc-I7-Iqj" firstAttribute="top" secondItem="ViH-1N-f1u" secondAttribute="bottom" id="CpU-qZ-OKF"/>
                             <constraint firstItem="7Wp-HZ-nP7" firstAttribute="trailing" secondItem="tSd-jb-9mi" secondAttribute="trailingMargin" id="DIN-jO-G5F"/>
                             <constraint firstItem="7Wp-HZ-nP7" firstAttribute="top" secondItem="nUr-HQ-YQL" secondAttribute="bottom" constant="8" id="Dth-tp-Tp0"/>
                             <constraint firstItem="ViH-1N-f1u" firstAttribute="leading" secondItem="tSd-jb-9mi" secondAttribute="leadingMargin" id="U9F-6l-LUr"/>
                             <constraint firstItem="7Wp-HZ-nP7" firstAttribute="leading" secondItem="tSd-jb-9mi" secondAttribute="leadingMargin" id="a28-qS-fq4"/>
+                            <constraint firstItem="SZc-I7-Iqj" firstAttribute="top" secondItem="hF8-sc-V9L" secondAttribute="bottom" id="c6y-4B-65H"/>
+                            <constraint firstAttribute="trailing" secondItem="hF8-sc-V9L" secondAttribute="trailing" id="ih9-nR-ZS0"/>
                             <constraint firstItem="ViH-1N-f1u" firstAttribute="top" secondItem="7Wp-HZ-nP7" secondAttribute="bottom" constant="8" id="j2j-eU-beH"/>
+                            <constraint firstItem="hF8-sc-V9L" firstAttribute="top" secondItem="tSd-jb-9mi" secondAttribute="top" id="wWh-uf-vQb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2U2-Ih-8JN"/>
                     <connections>
+                        <outlet property="activityView" destination="hF8-sc-V9L" id="4SY-Vq-gSj"/>
                         <outlet property="postTextField" destination="Ix8-3O-S9o" id="e4n-No-xGj"/>
                         <outlet property="selectImageIcon" destination="J2i-K6-DbN" id="u5Q-XL-maT"/>
                         <outlet property="tableView" destination="ViH-1N-f1u" id="RJ8-gw-PDR"/>
@@ -346,6 +377,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.75686274509803919" blue="0.027450980392156862" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

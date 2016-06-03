@@ -15,6 +15,7 @@ class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var postTextField: MaterialTextField!
     @IBOutlet weak var selectImageIcon: UIImageView!
+    @IBOutlet weak var activityView:LoadingIndicatorView!
     
     private var ref:FIRDatabaseReference!
     private var refHandle:FIRDatabaseHandle?
@@ -27,6 +28,11 @@ class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        self.title = AppState.sharedInstance.displayName
+        
+        activityView.statusTxt = "Hang tight! We're retrieving data."
+        activityView.hidden = false
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -51,6 +57,7 @@ class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                     }
                 }
                 self.tableView.reloadData()
+                self.activityView.hidden = true
             }
         })
     }

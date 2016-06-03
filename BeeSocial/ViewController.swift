@@ -24,6 +24,9 @@ class ViewController: UIViewController {
     {
         super.viewDidLoad()
         
+        emailTxtField.autocorrectionType = .No
+        emailTxtField.autocapitalizationType = .None
+        
         loginManager = LoginManager()
         loginManager.delegate = self
     }
