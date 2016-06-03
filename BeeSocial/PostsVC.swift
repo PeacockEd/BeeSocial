@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseDatabase
 
 class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
@@ -24,10 +25,16 @@ class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     private var imagePicker:UIImagePickerController!
     private var postData = [PostItem]()
     
+    var loginManager: LoginManager?
+    
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(NotificationKeys.signedOut, object: nil, queue: nil) { notification in
+            self.performSegueWithIdentifier("unwindToLogin", sender: nil)
+        }
         
         self.title = AppState.sharedInstance.displayName
         
@@ -103,6 +110,11 @@ class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             return 158
         }
         return tableView.estimatedRowHeight
+    }
+    
+    @IBAction func onTapLogout(sender: AnyObject)
+    {
+        loginManager?.logout()
     }
     
     @IBAction func onTapPost(sender: AnyObject)

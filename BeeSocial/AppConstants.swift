@@ -19,6 +19,11 @@ struct MessageFields {
     static let username = "username"
 }
 
+// FireBase Notifications
+struct NotificationKeys {
+    static let signedOut = "signedOut"
+}
+
 // UI Helpers
 let SHADOW_COLOR: CGFloat = 157.0 / 255.0
 

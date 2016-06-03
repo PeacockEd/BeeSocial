@@ -40,6 +40,16 @@ class ViewController: UIViewController {
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == SEGUE_LOGGED_IN {
+            if let nvc = segue.destinationViewController as? UINavigationController,
+                dvc = nvc.topViewController as? PostsVC
+            {
+                dvc.loginManager = loginManager
+            }
+        }
+    }
+    
     func showLoginErrorPrompt(withTitle title: String, withMsg msg: String)
     {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .Alert)
@@ -92,6 +102,8 @@ class ViewController: UIViewController {
             showLoginErrorPrompt(withTitle: "Login Error", withMsg: "You must enter a valid username and password.")
         }
     }
+    
+    @IBAction func unwindToLogin(segue: UIStoryboardSegue) {}
 }
 
 extension ViewController: LoginManagerDelegate
@@ -120,5 +132,5 @@ extension ViewController: LoginManagerDelegate
         } else {
             performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
         }
-    }
+    }   
 }

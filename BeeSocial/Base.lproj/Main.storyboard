@@ -351,15 +351,24 @@
                             <constraint firstItem="hF8-sc-V9L" firstAttribute="top" secondItem="tSd-jb-9mi" secondAttribute="top" id="wWh-uf-vQb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="2U2-Ih-8JN"/>
+                    <navigationItem key="navigationItem" id="2U2-Ih-8JN">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="KCS-zd-AXT">
+                            <color key="tintColor" red="0.30588235294117649" green="0.20392156862745098" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="onTapLogout:" destination="C9B-3W-8vg" id="vYv-kT-cER"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityView" destination="hF8-sc-V9L" id="4SY-Vq-gSj"/>
                         <outlet property="postTextField" destination="Ix8-3O-S9o" id="e4n-No-xGj"/>
                         <outlet property="selectImageIcon" destination="J2i-K6-DbN" id="u5Q-XL-maT"/>
                         <outlet property="tableView" destination="ViH-1N-f1u" id="RJ8-gw-PDR"/>
+                        <segue destination="9pf-TE-gL4" kind="unwind" identifier="unwindToLogin" unwindAction="unwindToLogin:" id="DoW-1l-gFW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8NM-yn-icQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="9pf-TE-gL4" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="rgd-wr-c5k">
                     <connections>
                         <action selector="onTapSelectImage:" destination="C9B-3W-8vg" id="vuc-py-PeV"/>
@@ -378,7 +387,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.75686274509803919" blue="0.027450980392156862" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.30588235294117649" green="0.20392156862745098" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>

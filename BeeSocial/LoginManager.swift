@@ -18,6 +18,16 @@ class LoginManager: NSObject {
     
     weak var delegate:LoginManagerDelegate?
     
+    override init()
+    {
+        super.init()
+        
+        FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
+            if user == nil {
+                NSNotificationCenter.defaultCenter().postNotificationName(NotificationKeys.signedOut, object: nil)
+            }
+        }
+    }
     
     func authenticateUser(email: String, password pwd:String)
     {
@@ -39,7 +49,6 @@ class LoginManager: NSObject {
             } else {
                 if let user = user {
                     print("*** USER ALREADY EXISTED AND USER LOGGED IN: \(user.uid)")
-                    print(user.displayName)
                     result = AuthResponse.Success(true)
                     self.signedIn(user) {
                         self.delegate?.onAuthenticationResult(result!)
@@ -85,13 +94,17 @@ class LoginManager: NSObject {
         }
     }
     
+    func logout()
+    {
+        do {
+            try FIRAuth.auth()?.signOut()
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
     func userExists() -> Bool
     {
-//        do {
-//            try FIRAuth.auth()?.signOut()
-//        } catch let error as NSError {
-//            print(error)
-//        }
         if let user = FIRAuth.auth()?.currentUser {
             signedIn(user, completionHandler: nil)
             return true
