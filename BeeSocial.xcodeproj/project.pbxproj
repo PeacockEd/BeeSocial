@@ -131,11 +131,9 @@
 		B2F4A0961CE8E2280005A783 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B26034491CE7607C009BBF93 /* ViewController.swift */,
 				B2F654551CEAA99700090D9C /* MaterialView.swift */,
 				B2F654591CEAAF0900090D9C /* MaterialButton.swift */,
 				B2F6545B1CEAB21A00090D9C /* MaterialTextField.swift */,
-				B2FF66A41CEE650F004DBE51 /* PostsVC.swift */,
 				B2FF66A61CEE678E004DBE51 /* PostCell.swift */,
 				EEC69EE31D01CE8900DFF3ED /* LoadingIndicatorView.swift */,
 			);
@@ -145,6 +143,8 @@
 		B2F4A0971CE8E22F0005A783 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B26034491CE7607C009BBF93 /* ViewController.swift */,
+				B2FF66A41CEE650F004DBE51 /* PostsVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";

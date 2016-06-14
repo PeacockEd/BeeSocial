@@ -111,6 +111,7 @@ extension ViewController: LoginManagerDelegate
     func onAuthenticationResult(result: AuthResponse) {
         if result.error == nil {
             performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
+            clearLoginForm()
         } else {
             if let error = result.error {
                 switch(error) {

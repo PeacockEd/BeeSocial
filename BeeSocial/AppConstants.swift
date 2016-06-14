@@ -8,6 +8,10 @@
 
 import Foundation
 import UIKit
+import Firebase
+
+let BASE_REF = FIRDatabase.database().reference()
+let BASE_STORAGE_REF = FIRStorage.storage().referenceForURL("gs://project-1910258691540389069.appspot.com")
 
 // FireBase Key Names
 struct MessageFields {
@@ -17,6 +21,7 @@ struct MessageFields {
     static let imageUrl = "imageUrl"
     static let likes = "likes"
     static let username = "username"
+    static let authMethod = "auth-method"
 }
 
 // FireBase Notifications

@@ -40,12 +40,13 @@ class PostCell: UITableViewCell {
         likesLbl.text = "\(post.likes)"
         
         if post.imageUrl != nil {
+            postImage.hidden = false
             if img != nil {
-                print("CACHED!")
                 postImage.image = img
             } else {
                 request = Alamofire.request(.GET, post.imageUrl!).validate(contentType: ["image/*"]).response(completionHandler: { request, response, data, error in
                     guard error == nil else {
+                        //print("error downloading image! \(error.debugDescription)")
                         return
                     }
                     if let data = data,

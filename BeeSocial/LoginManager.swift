@@ -66,9 +66,13 @@ class LoginManager: NSObject {
             } else {
                 if let user = user {
                     print("*** USER CREATED AND LOGGED IN: \(user.uid)")
-                    self.setDisplayName(user) {
-                        self.delegate?.onCreateUserResult(AuthResponse.Success(true))
-                    }
+                    var userData = [MessageFields.username : email]
+                    userData[MessageFields.authMethod] = "email"
+                    BASE_REF.child(MessageFields.users).child(user.uid).setValue(userData, withCompletionBlock: { (error, dbRef) in
+                        self.setDisplayName(user) {
+                            self.delegate?.onCreateUserResult(AuthResponse.Success(true))
+                        }
+                    })
                 }
             }
         }

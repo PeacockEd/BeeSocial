@@ -7,23 +7,30 @@
 //
 
 import UIKit
+import MobileCoreServices
+import Photos
 import Firebase
 import FirebaseDatabase
+import FirebaseStorage
 
 class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
-        UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var postTextField: MaterialTextField!
     @IBOutlet weak var selectImageIcon: UIImageView!
     @IBOutlet weak var activityView:LoadingIndicatorView!
+    @IBOutlet weak var postButton:UIButton!
+    @IBOutlet weak var postActivityView:UIActivityIndicatorView!
     
-    private var ref:FIRDatabaseReference!
     private var refHandle:FIRDatabaseHandle?
     static var postImagesCache = NSCache()
     
     private var imagePicker:UIImagePickerController!
     private var postData = [PostItem]()
+    
+    private var isPostingMessage = false
+    private var selectedImageURL: NSURL?
     
     var loginManager: LoginManager?
     
@@ -36,24 +43,23 @@ class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             self.performSegueWithIdentifier("unwindToLogin", sender: nil)
         }
         
+        postActivityView.hidden = true
         self.title = AppState.sharedInstance.displayName
         
         activityView.statusTxt = "Hang tight! We're retrieving data."
         activityView.hidden = false
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 373
         
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        
-        ref = FIRDatabase.database().reference()
     }
     
     override func viewWillAppear(animated: Bool)
     {
-        refHandle = ref.child(MessageFields.posts).observeEventType(.Value, withBlock: { (snapshot) in
+        refHandle = BASE_REF.child(MessageFields.posts).observeEventType(.Value, withBlock: { (snapshot) in
             self.postData = []
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for item in snapshots {
@@ -72,7 +78,7 @@ class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     override func viewWillDisappear(animated: Bool)
     {
         if let handle = refHandle {
-            ref.removeObserverWithHandle(handle)
+            BASE_REF.removeObserverWithHandle(handle)
         }
     }
     
@@ -112,6 +118,51 @@ class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         return tableView.estimatedRowHeight
     }
     
+    private func sendMessage(post data:[String: AnyObject])
+    {
+        var messageData = data
+        if let imageUrl = selectedImageURL {
+            let assets = PHAsset.fetchAssetsWithALAssetURLs([imageUrl], options: nil)
+            let asset = assets.firstObject
+            asset?.requestContentEditingInputWithOptions(nil, completionHandler: { (input, info) in
+                if let imageFile = input?.fullSizeImageURL, auth = FIRAuth.auth()?.currentUser?.uid {
+                    let filePath = "\(auth)/\(Int(NSDate.timeIntervalSinceReferenceDate() * 1000))/\(imageUrl.lastPathComponent!)"
+                    let metadata = FIRStorageMetadata()
+                    metadata.contentType = "image/jpeg"
+                    BASE_STORAGE_REF.child(filePath)
+                        .putFile(imageFile, metadata: metadata) { (metadata, error) in
+                            guard error == nil else {
+                                print("Error uploading image. \(error.debugDescription)")
+                                // TODO: Display error
+                                return
+                            }
+                            messageData[MessageFields.imageUrl] = BASE_STORAGE_REF.child((metadata?.path)!).description
+                            BASE_REF.child(MessageFields.posts).childByAutoId().setValue(messageData, andPriority: nil, withCompletionBlock: self.onPostCommitted)
+                    }
+                }
+            })
+        } else {
+            BASE_REF.child(MessageFields.posts).childByAutoId().setValue(messageData, andPriority: nil, withCompletionBlock: onPostCommitted)
+        }
+    }
+    
+    private func onPostCommitted(error: NSError?, reference: FIRDatabaseReference)
+    {
+        if error == nil, let user = FIRAuth.auth()?.currentUser?.uid {
+            BASE_REF.child(MessageFields.users).child(user).child(reference.key).setValue(true, andPriority: nil, withCompletionBlock: { (error, ref) in
+                guard error == nil else {
+                    // TODO: Display error
+                    return
+                }
+                self.isPostingMessage = false
+                self.postButton.hidden = false
+                self.postActivityView.stopAnimating()
+                self.postActivityView.hidden = true
+                self.postTextField.text = ""
+            })
+        }
+    }
+    
     @IBAction func onTapLogout(sender: AnyObject)
     {
         loginManager?.logout()
@@ -119,20 +170,40 @@ class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     @IBAction func onTapPost(sender: AnyObject)
     {
+        isPostingMessage = true
+        postButton.hidden = true
+        postActivityView.hidden = false
+        postActivityView.startAnimating()
         
+        let message: [String : AnyObject] = [MessageFields.description: postTextField.text ?? "", MessageFields.likes: 0]
+        sendMessage(post: message)
     }
     
     @IBAction func onTapSelectImage(sender: AnyObject)
     {
+        if isPostingMessage {
+            return
+        }
         presentViewController(imagePicker, animated: true, completion: nil)
     }
 }
 
 extension PostsVC {
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?)
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
+        switch info[UIImagePickerControllerMediaType] as! NSString {
+        case kUTTypeImage:
+            if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                selectImageIcon.image = selectedImage
+                selectedImageURL = info[UIImagePickerControllerReferenceURL] as? NSURL
+            }
+            break
+        default:
+            // display a friendly reminder that media (i.e. movies)
+            // other than images are not supported
+            break
+        }
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
-        selectImageIcon.image = image
     }
 }
