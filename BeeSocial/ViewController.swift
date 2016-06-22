@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     private var attemptedPwd:String?
     private var attemptedEmail:String?
     
+    private var newUser = false
     private var loginManager: LoginManager!
     
     
@@ -46,6 +47,7 @@ class ViewController: UIViewController {
                 dvc = nvc.topViewController as? PostsVC
             {
                 dvc.loginManager = loginManager
+                dvc.newUser = newUser
             }
         }
     }
@@ -131,6 +133,7 @@ extension ViewController: LoginManagerDelegate
         if result.error != nil {
             showLoginErrorPrompt(withTitle: "Login Error", withMsg: "A problem occured while attempting to create this account.")
         } else {
+            newUser = true
             performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
         }
     }   

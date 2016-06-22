@@ -24,6 +24,7 @@
 		B2FF66A71CEE678E004DBE51 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF66A61CEE678E004DBE51 /* PostCell.swift */; };
 		EE1974911D01F73A00B43D90 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1974901D01F73A00B43D90 /* AppState.swift */; };
 		EE2C6BAF1CFC7EB900327AD2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE2C6BAE1CFC7EB900327AD2 /* GoogleService-Info.plist */; };
+		EE8CC97F1D199BF500AE34CD /* ProfileSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8CC97E1D199BF500AE34CD /* ProfileSettingsVC.swift */; };
 		EE9F495B1D00AE8C0050C7DF /* PostItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9F495A1D00AE8C0050C7DF /* PostItem.swift */; };
 		EEC69EE41D01CE8900DFF3ED /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC69EE31D01CE8900DFF3ED /* LoadingIndicatorView.swift */; };
 /* End PBXBuildFile section */
@@ -50,6 +51,7 @@
 		E1CBFEB493A6BF7327D11935 /* Pods-BeeSocial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeeSocial.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeeSocial/Pods-BeeSocial.debug.xcconfig"; sourceTree = "<group>"; };
 		EE1974901D01F73A00B43D90 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		EE2C6BAE1CFC7EB900327AD2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EE8CC97E1D199BF500AE34CD /* ProfileSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSettingsVC.swift; sourceTree = "<group>"; };
 		EE9F495A1D00AE8C0050C7DF /* PostItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostItem.swift; sourceTree = "<group>"; };
 		EEC69EE31D01CE8900DFF3ED /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +147,7 @@
 			children = (
 				B26034491CE7607C009BBF93 /* ViewController.swift */,
 				B2FF66A41CEE650F004DBE51 /* PostsVC.swift */,
+				EE8CC97E1D199BF500AE34CD /* ProfileSettingsVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -174,12 +177,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B26034561CE7607C009BBF93 /* Build configuration list for PBXNativeTarget "BeeSocial" */;
 			buildPhases = (
+				63762E3471910B3EA5E9C928 /* 📦 Check Pods Manifest.lock */,
 				DE60B417D6A588FE34F82C01 /* [CP] Check Pods Manifest.lock */,
 				B26034401CE7607C009BBF93 /* Sources */,
 				B26034411CE7607C009BBF93 /* Frameworks */,
 				B26034421CE7607C009BBF93 /* Resources */,
 				F8932E27F8AC02D9C6E66E33 /* [CP] Embed Pods Frameworks */,
 				8B87B4F5426FAA5F8E2CFD76 /* [CP] Copy Pods Resources */,
+				EE3EC2E2A296822FB2B814FC /* 📦 Embed Pods Frameworks */,
+				DE4C42C247F9F79FFF183B30 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -238,6 +244,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		63762E3471910B3EA5E9C928 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		8B87B4F5426FAA5F8E2CFD76 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -246,6 +267,21 @@
 			inputPaths = (
 			);
 			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BeeSocial/Pods-BeeSocial-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE4C42C247F9F79FFF183B30 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,6 +302,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EE3EC2E2A296822FB2B814FC /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BeeSocial/Pods-BeeSocial-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F8932E27F8AC02D9C6E66E33 /* [CP] Embed Pods Frameworks */ = {
@@ -292,6 +343,7 @@
 			files = (
 				EEC69EE41D01CE8900DFF3ED /* LoadingIndicatorView.swift in Sources */,
 				B260344A1CE7607C009BBF93 /* ViewController.swift in Sources */,
+				EE8CC97F1D199BF500AE34CD /* ProfileSettingsVC.swift in Sources */,
 				B2F6545A1CEAAF0900090D9C /* MaterialButton.swift in Sources */,
 				B2FF66A71CEE678E004DBE51 /* PostCell.swift in Sources */,
 				B2FF66A51CEE650F004DBE51 /* PostsVC.swift in Sources */,

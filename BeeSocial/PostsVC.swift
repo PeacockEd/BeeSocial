@@ -13,6 +13,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseStorage
 
+
 class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
 UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -26,12 +27,14 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private var refHandle:FIRDatabaseHandle?
     static var postImagesCache = NSCache()
     
+    private var settingsVC: ProfileSettingsVC!
     private var imagePicker:UIImagePickerController!
     private var postData = [PostItem]()
     
     private var isPostingMessage = false
     private var selectedImageURL: NSURL?
     
+    var newUser = false
     var loginManager: LoginManager?
     
     
@@ -55,6 +58,8 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
+        
+        settingsVC = ProfileSettingsVC()
     }
     
     override func viewWillAppear(animated: Bool)
@@ -73,6 +78,10 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
                 self.activityView.hidden = true
             }
         })
+        
+        if newUser {
+            performSegueWithIdentifier(SEGUE_PROFILE_INFO, sender: nil)
+        }
     }
     
     override func viewWillDisappear(animated: Bool)
@@ -149,7 +158,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private func onPostCommitted(error: NSError?, reference: FIRDatabaseReference)
     {
         if error == nil, let user = FIRAuth.auth()?.currentUser?.uid {
-            BASE_REF.child(MessageFields.users).child(user).child(reference.key).setValue(true, andPriority: nil, withCompletionBlock: { (error, ref) in
+            BASE_REF.child(MessageFields.users).child(user).child(MessageFields.posts).child(reference.key).setValue(true, andPriority: nil, withCompletionBlock: { (error, ref) in
                 guard error == nil else {
                     // TODO: Display error
                     return
@@ -166,6 +175,11 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBAction func onTapLogout(sender: AnyObject)
     {
         loginManager?.logout()
+    }
+    
+    @IBAction func onTapSettings(sender: AnyObject)
+    {
+        navigationController?.pushViewController(settingsVC, animated: true)
     }
     
     @IBAction func onTapPost(sender: AnyObject)

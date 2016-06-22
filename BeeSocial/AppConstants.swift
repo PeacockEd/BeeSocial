@@ -47,3 +47,4 @@ typealias AuthResponse = AuthResult<Bool, Int>
 
 // Segues
 let SEGUE_LOGGED_IN = "segueLoggedIn"
+let SEGUE_PROFILE_INFO = "segueProfileInfo"

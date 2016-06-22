@@ -35,11 +35,9 @@ class PostItem {
         return _username
     }
     
-    init(description: String, imageUrl: String?, username: String)
+    var postId: String
     {
-        self._postDescription = description
-        self._imageUrl = imageUrl
-        self._username = username
+        return _postId
     }
     
     init(postId:String, data:Dictionary<String, AnyObject>)
