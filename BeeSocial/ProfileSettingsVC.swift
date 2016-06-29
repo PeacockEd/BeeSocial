@@ -18,7 +18,7 @@ class ProfileSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var profileImage: UIImageView!
     
-    private var profileImageUrl:NSURL?
+    private var imageSelected = false
     private var imagePicker: UIImagePickerController!
     
     
@@ -27,41 +27,128 @@ class ProfileSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINa
         super.viewDidLoad()
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
+        
+        profileImage.userInteractionEnabled = true
+        let imageGesture = UITapGestureRecognizer(target: self, action: #selector(onImageTapped(_:)))
+        profileImage.addGestureRecognizer(imageGesture)
+        
+        if let displayName = AppState.sharedInstance.displayName {
+            nameTextField.text = displayName
+        }
+        
+        profileImage.image = loadProfileImage() ?? UIImage(named: "camera.png")
     }
     
-    private func updateProfile(displayName: String?, profileImage: UIImage?)
+    @objc private func onImageTapped(sender: UITapGestureRecognizer)
+    {
+        presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    private func loadProfileImage() -> UIImage?
+    {
+        var image: UIImage?
+        if let user = FIRAuth.auth()?.currentUser {
+            let filename = "\(user.uid)\(PROFILE_IMAGE_FILE_SUFFIX)"
+            let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+            let dir = paths[0]
+            let path = (dir as NSString).stringByAppendingPathComponent(filename)
+            image = UIImage(contentsOfFile: path)
+        }
+        return image
+    }
+    
+    private func updateProfile(displayName: String?, completionBlock: (() -> ())?)
     {
         if let user = FIRAuth.auth()?.currentUser {
-            let changeRequest = user.profileChangeRequest()
-            if let name = displayName {
-                changeRequest.displayName = name
+            func updateUsername()
+            {
+                if let name = displayName {
+                    let changeRequest = user.profileChangeRequest()
+                    changeRequest.displayName = name
+                    changeRequest.commitChangesWithCompletion { error in
+                        guard error == nil else {
+                            // TODO: Display error
+                            return
+                        }
+                        AppState.sharedInstance.displayName = name
+                        completionBlock?()
+                        print("UPDATE USER NAME")
+                    }
+                } else {
+                    print("NO USER NAME!")
+                    completionBlock?()
+                }
             }
-            if let imageUrl = profileImageUrl {
-                let assets = PHAsset.fetchAssetsWithALAssetURLs([imageUrl], options: nil)
-                let asset = assets.firstObject
-                asset?.requestContentEditingInputWithOptions(nil, completionHandler: { (input, info) in
-                    if let imageFile = input?.fullSizeImageURL, auth = FIRAuth.auth()?.currentUser?.uid {
-                        let filePath = "\(auth)/\(Int(NSDate.timeIntervalSinceReferenceDate() * 1000))/\(imageUrl.lastPathComponent!)"
-                        let metadata = FIRStorageMetadata()
-                        metadata.contentType = "image/jpeg"
-                        BASE_STORAGE_REF.child(filePath)
-                            .putFile(imageFile, metadata: metadata) { (metadata, error) in
-                                guard error == nil else {
-                                    print("Error uploading image. \(error.debugDescription)")
-                                    // TODO: Display error
-                                    return
-                                }
-                                changeRequest.photoURL = NSURL(string: BASE_STORAGE_REF.child((metadata?.path)!).description)
+            
+            if imageSelected {
+                func uploadImage()
+                {
+                    guard profileImage.image != nil else {
+                        // TODO Handle error
+                        updateUsername()
+                        return
+                    }
+                    let thumbPath = AppUtils.saveImageToDocumentsAndReturnPath(profileImage.image, withFilename: "\(user.uid)\(PROFILE_IMAGE_FILE_SUFFIX)")
+                    
+                    guard thumbPath != nil else {
+                        // TODO: Display error
+                        updateUsername()
+                        return
+                    }
+                    
+                    let filePath = "\(user.uid)/\(Int(NSDate.timeIntervalSinceReferenceDate() * 1000))/\(thumbPath!.lastPathComponent!)"
+                    let metadata = FIRStorageMetadata()
+                    metadata.contentType = "image/jpeg"
+                    
+                    BASE_STORAGE_REF.child(filePath)
+                        .putFile(thumbPath!, metadata: metadata) { (metadata, error) in
+                            guard error == nil else {
+                                print("Error uploading image. \(error.debugDescription)")
+                                // TODO: Display error
+                                updateUsername()
+                                return
+                            }
+                            BASE_REF.child(MessageFields.users).child(user.uid).child(MessageFields.profileImgUrl).setValue(BASE_STORAGE_REF.child((metadata?.path)!).description)
+                    }
+                    updateUsername()
+                }
+                
+                BASE_REF.child(MessageFields.users).child(user.uid).child(MessageFields.profileImgUrl).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                    if let _ = snapshot.value as? NSNull {
+                        uploadImage()
+                    } else {
+                        if let path = snapshot.value as? String {
+                            let ref = BASE_STORAGE_REF.storage.referenceForURL(path)
+                            ref.deleteWithCompletion { error in
+                                print("Error: \(error.debugDescription)")
+                                print("PATH TO DELETE: \(path)")
+                                uploadImage()
+                            }
                         }
                     }
                 })
+            } else {
+                print("NO IMAGE!")
+                updateUsername()
             }
+        }
+    }
+    
+    private func generateThumbnail(image: UIImage)
+    {
+        if let imageData = UIImagePNGRepresentation(image) {
+            let scale = AppUtils.getScaleForProportionalResize(profileImage.image!.size, intoSize: PROFILE_THUMB_SIZE, onlyScaleDown: true)
+            let thumbImage = AppUtils.imageWithImage(UIImage(data: imageData)!, scaledToSize: CGSizeMake(PROFILE_THUMB_SIZE.width * scale, PROFILE_THUMB_SIZE.height * scale))
+            profileImage.image = thumbImage
         }
     }
     
     @IBAction func onTapSave(sender: AnyObject)
     {
-        
+        updateProfile(nameTextField.text) {
+            print("DONE. UPDATED. \((FIRAuth.auth()?.currentUser?.displayName)!)")
+            self.profileImage.image = self.loadProfileImage() ?? UIImage(named: "camera.png")
+        }
     }
     
     @IBAction func onTapCancel(sender: AnyObject)
@@ -77,8 +164,9 @@ extension ProfileSettingsVC {
         switch info[UIImagePickerControllerMediaType] as! NSString {
         case kUTTypeImage:
             if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-                profileImage.image = selectedImage
-                profileImageUrl = info[UIImagePickerControllerReferenceURL] as? NSURL
+                imageSelected = true
+                //profileImage.image = selectedImage
+                generateThumbnail(selectedImage)
             }
             break
         default:

@@ -165,7 +165,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q7S-bh-SB3" customClass="MaterialView" customModule="BeeSocial" customModuleProvider="target">
                                 <rect key="frame" x="20" y="99" width="560" height="330"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="khr-Uu-yWq">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="khr-Uu-yWq">
                                         <rect key="frame" x="242" y="13" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="0Pd-P8-doO"/>

@@ -22,6 +22,7 @@ struct MessageFields {
     static let likes = "likes"
     static let username = "username"
     static let authMethod = "auth-method"
+    static let profileImgUrl = "profileImgUrl"
 }
 
 // FireBase Notifications
@@ -31,6 +32,10 @@ struct NotificationKeys {
 
 // UI Helpers
 let SHADOW_COLOR: CGFloat = 157.0 / 255.0
+
+// Settings values
+let PROFILE_THUMB_SIZE: CGSize = CGSizeMake(400.0, 400.0)
+let PROFILE_IMAGE_FILE_SUFFIX = "-thumb.png"
 
 // Firebase Login Error Conditions
 let LOGIN_USER_NOT_FOUND = 17011
