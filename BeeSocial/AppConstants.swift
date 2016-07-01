@@ -35,6 +35,7 @@ let SHADOW_COLOR: CGFloat = 157.0 / 255.0
 
 // Settings values
 let PROFILE_THUMB_SIZE: CGSize = CGSizeMake(400.0, 400.0)
+let POST_IMAGE_SIZE: CGSize = CGSizeMake(800.00, 800.0)
 let PROFILE_IMAGE_FILE_SUFFIX = "-thumb.png"
 
 // Firebase Login Error Conditions

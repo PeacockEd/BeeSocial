@@ -23,8 +23,9 @@ class PostCell: UITableViewCell {
     
     var post:PostItem?
     var request: Request?
+    var gsReference: FIRStorageDownloadTask?
     
-
+    
     override func awakeFromNib()
     {
         super.awakeFromNib()
@@ -41,10 +42,12 @@ class PostCell: UITableViewCell {
         profileImg.clipsToBounds = true
         postImage.clipsToBounds = true
     }
-
+    
     func configureCell(withPost post: PostItem, withImage img: UIImage?)
     {
         request?.cancel()
+        gsReference?.cancel()
+        postImage.image = nil
         
         self.post = post
         
@@ -67,25 +70,26 @@ class PostCell: UITableViewCell {
                 postImage.image = img
             } else {
                 if imageUrl.hasPrefix("gs://") {
-                    FIRStorage.storage().referenceForURL(imageUrl).dataWithMaxSize(INT64_MAX){ (data, error) in
+                    self.gsReference = FIRStorage.storage().referenceForURL(imageUrl).dataWithMaxSize(INT64_MAX){ (data, error) in
                         if let error = error {
                             print("Error downloading: \(error)")
                             return
                         }
                         self.postImage.image = UIImage.init(data: data!)
+                        PostsVC.postImagesCache.setObject(self.postImage.image!, forKey: post.imageUrl!)
                     }
                 } else {
-                request = Alamofire.request(.GET, post.imageUrl!).validate(contentType: ["image/*"]).response(completionHandler: { request, response, data, error in
-                    guard error == nil else {
-                        //print("error downloading image! \(error.debugDescription)")
-                        return
-                    }
-                    if let data = data,
-                        image = UIImage(data: data) {
-                        self.postImage.image = image
-                        PostsVC.postImagesCache.setObject(image, forKey: post.imageUrl!)
-                    }
-                })
+                    request = Alamofire.request(.GET, post.imageUrl!).validate(contentType: ["image/*"]).response(completionHandler: { request, response, data, error in
+                        guard error == nil else {
+                            //print("error downloading image! \(error.debugDescription)")
+                            return
+                        }
+                        if let data = data,
+                            image = UIImage(data: data) {
+                            self.postImage.image = image
+                            PostsVC.postImagesCache.setObject(image, forKey: post.imageUrl!)
+                        }
+                    })
                 }
             }
         } else {
@@ -95,7 +99,6 @@ class PostCell: UITableViewCell {
     
     @objc private func onTapLike(sender: UITapGestureRecognizer)
     {
-        //self.post?.likes
         if let post = self.post, user = FIRAuth.auth()?.currentUser?.uid {
             var numOfLikes = post.likes
             BASE_REF.child(MessageFields.users).child(user).child(MessageFields.likes).child(post.postId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in

@@ -28,11 +28,11 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     static var postImagesCache = NSCache()
     
     private var settingsVC: ProfileSettingsVC!
+    private var imageSelected = false
     private var imagePicker:UIImagePickerController!
     private var postData = [PostItem]()
     
     private var isPostingMessage = false
-    private var selectedImageURL: NSURL?
     
     var newUser = false
     var loginManager: LoginManager?
@@ -134,28 +134,36 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private func sendMessage(post data:[String: AnyObject])
     {
         var messageData = data
-        if let imageUrl = selectedImageURL {
-            let assets = PHAsset.fetchAssetsWithALAssetURLs([imageUrl], options: nil)
-            let asset = assets.firstObject
-            asset?.requestContentEditingInputWithOptions(nil, completionHandler: { (input, info) in
-                if let imageFile = input?.fullSizeImageURL, auth = FIRAuth.auth()?.currentUser?.uid {
-                    let filePath = "\(auth)/\(Int(NSDate.timeIntervalSinceReferenceDate() * 1000))/\(imageUrl.lastPathComponent!)"
-                    let metadata = FIRStorageMetadata()
-                    metadata.contentType = "image/jpeg"
-                    BASE_STORAGE_REF.child(filePath)
-                        .putFile(imageFile, metadata: metadata) { (metadata, error) in
-                            guard error == nil else {
-                                print("Error uploading image. \(error.debugDescription)")
-                                // TODO: Display error
-                                return
-                            }
-                            messageData[MessageFields.imageUrl] = BASE_STORAGE_REF.child((metadata?.path)!).description
-                            BASE_REF.child(MessageFields.posts).childByAutoId().setValue(messageData, andPriority: nil, withCompletionBlock: self.onPostCommitted)
-                    }
+        if let user = FIRAuth.auth()?.currentUser {
+            if imageSelected && selectImageIcon.image != nil {
+                let thumbImage = AppUtils.generateThumbnailFromImage(selectImageIcon.image!, intoSize: POST_IMAGE_SIZE)
+                let thumbPath = AppUtils.saveImageToDocumentsAndReturnPath(thumbImage, withFilename: "\(Int(NSDate.timeIntervalSinceReferenceDate() * 1000))-asset.png")
+                
+                guard thumbPath != nil else {
+                    // TODO display some error
+                    return
                 }
-            })
+                
+                let filePath = "\(user.uid)/\(Int(NSDate.timeIntervalSinceReferenceDate() * 1000))/asset.png"
+                let metadata = FIRStorageMetadata()
+                metadata.contentType = "image/jpeg"
+                
+                BASE_STORAGE_REF.child(filePath)
+                    .putFile(thumbPath!, metadata: metadata) { (metadata, error) in
+                        guard error == nil else {
+                            print("Error uploading image. \(error.debugDescription)")
+                            // TODO: Display error
+                            return
+                        }
+                        messageData[MessageFields.imageUrl] = BASE_STORAGE_REF.child((metadata?.path)!).description
+                        BASE_REF.child(MessageFields.posts).childByAutoId().setValue(messageData, andPriority: nil, withCompletionBlock: self.onPostCommitted)
+                        self.selectImageIcon.image = UIImage(named: "camera.png")
+                }
+            } else {
+                BASE_REF.child(MessageFields.posts).childByAutoId().setValue(messageData, andPriority: nil, withCompletionBlock: onPostCommitted)
+            }
         } else {
-            BASE_REF.child(MessageFields.posts).childByAutoId().setValue(messageData, andPriority: nil, withCompletionBlock: onPostCommitted)
+            // TODO: display auth error
         }
     }
     
@@ -213,13 +221,15 @@ extension PostsVC {
         switch info[UIImagePickerControllerMediaType] as! NSString {
         case kUTTypeImage:
             if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                imageSelected = true
                 selectImageIcon.image = selectedImage
-                selectedImageURL = info[UIImagePickerControllerReferenceURL] as? NSURL
+                //selectedImageURL = info[UIImagePickerControllerReferenceURL] as? NSURL
             }
             break
         default:
-            // display a friendly reminder that media (i.e. movies)
+            // TODO: display a friendly reminder that media (i.e. movies)
             // other than images are not supported
+            selectImageIcon.image = UIImage(named: "camera.png")
             break
         }
         imagePicker.dismissViewControllerAnimated(true, completion: nil)

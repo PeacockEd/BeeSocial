@@ -134,19 +134,9 @@ class ProfileSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINa
         }
     }
     
-    private func generateThumbnail(image: UIImage)
-    {
-        if let imageData = UIImagePNGRepresentation(image) {
-            let scale = AppUtils.getScaleForProportionalResize(profileImage.image!.size, intoSize: PROFILE_THUMB_SIZE, onlyScaleDown: true)
-            let thumbImage = AppUtils.imageWithImage(UIImage(data: imageData)!, scaledToSize: CGSizeMake(PROFILE_THUMB_SIZE.width * scale, PROFILE_THUMB_SIZE.height * scale))
-            profileImage.image = thumbImage
-        }
-    }
-    
     @IBAction func onTapSave(sender: AnyObject)
     {
         updateProfile(nameTextField.text) {
-            print("DONE. UPDATED. \((FIRAuth.auth()?.currentUser?.displayName)!)")
             self.profileImage.image = self.loadProfileImage() ?? UIImage(named: "camera.png")
         }
     }
@@ -164,9 +154,10 @@ extension ProfileSettingsVC {
         switch info[UIImagePickerControllerMediaType] as! NSString {
         case kUTTypeImage:
             if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-                imageSelected = true
-                //profileImage.image = selectedImage
-                generateThumbnail(selectedImage)
+                if let thumbImage = AppUtils.generateThumbnailFromImage(selectedImage, intoSize: PROFILE_THUMB_SIZE) {
+                    imageSelected = true
+                    profileImage.image = thumbImage
+                }
             }
             break
         default:

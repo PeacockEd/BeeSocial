@@ -67,4 +67,17 @@ class AppUtils {
         }
         return imageUrl
     }
+    
+    static func generateThumbnailFromImage(image: UIImage, intoSize size:CGSize) -> UIImage?
+    {
+        var thumbImage:UIImage? = nil
+        
+        if let imageData = UIImagePNGRepresentation(image) {
+            let scale = AppUtils.getScaleForProportionalResize(image.size, intoSize: size, onlyScaleDown: true)
+            let _thumb_image = AppUtils.imageWithImage(UIImage(data: imageData)!, scaledToSize: CGSizeMake(size.width * scale, size.height * scale))
+            thumbImage = _thumb_image
+        }
+        
+        return thumbImage
+    }
 }
