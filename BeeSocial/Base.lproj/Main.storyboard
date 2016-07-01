@@ -237,7 +237,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="kpI-TS-IM7">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="rMN-MN-KHZ">
-                            <color key="tintColor" red="0.30588235294117649" green="0.20392156862745098" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="onTapCancel:" destination="G1W-5W-445" id="BIl-dw-bBH"/>
                             </connections>
@@ -471,13 +470,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="2U2-Ih-8JN">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="KCS-zd-AXT">
-                            <color key="tintColor" red="0.30588235294117649" green="0.20392156862745098" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="onTapLogout:" destination="C9B-3W-8vg" id="vYv-kT-cER"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="BHh-J1-U48">
-                            <color key="tintColor" red="0.30588235294117649" green="0.20392156862745098" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="onTapSettings:" destination="C9B-3W-8vg" id="ltw-eh-Zfc"/>
                                 <segue destination="G1W-5W-445" kind="show" identifier="segueProfileInfo" id="2c9-bg-q3a"/>

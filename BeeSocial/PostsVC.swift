@@ -42,6 +42,8 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     {
         super.viewDidLoad()
         
+        UINavigationBar.appearance().tintColor = UIColor(red: 78/255.0, green: 52/255.0, blue: 46/255.0, alpha: 1.0)
+        
         NSNotificationCenter.defaultCenter().addObserverForName(NotificationKeys.signedOut, object: nil, queue: nil) { notification in
             self.performSegueWithIdentifier("unwindToLogin", sender: nil)
         }
@@ -64,6 +66,8 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     override func viewWillAppear(animated: Bool)
     {
+        self.navigationController?.navigationBar.topItem?.title = ""
+        
         refHandle = BASE_REF.child(MessageFields.posts).observeEventType(.Value, withBlock: { (snapshot) in
             self.postData = []
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
