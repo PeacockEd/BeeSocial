@@ -23,6 +23,7 @@ struct MessageFields {
     static let username = "username"
     static let authMethod = "auth-method"
     static let profileImgUrl = "profileImgUrl"
+    static let timestamp = "timestamp"
 }
 
 // FireBase Notifications

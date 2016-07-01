@@ -41,7 +41,7 @@ class AppUtils {
         if sx != 0 && sy != 0 {
             dx = dx / sx
             dy = dy / sy
-            scale = (dx > dy) ? dx : dy
+            scale = min(dx, dy)// (dx > dy) ? dx : dy
         }
         
         if scale > 1 && onlyScaleDown {
@@ -73,8 +73,14 @@ class AppUtils {
         var thumbImage:UIImage? = nil
         
         if let imageData = UIImagePNGRepresentation(image) {
+            //let size = image.size
             let scale = AppUtils.getScaleForProportionalResize(image.size, intoSize: size, onlyScaleDown: true)
-            let _thumb_image = AppUtils.imageWithImage(UIImage(data: imageData)!, scaledToSize: CGSizeMake(size.width * scale, size.height * scale))
+            var _thumb_image: UIImage!
+            if scale < 1 {
+                _thumb_image = AppUtils.imageWithImage(UIImage(data: imageData)!, scaledToSize: CGSizeMake(image.size.width * scale, image.size.height * scale))
+            } else {
+                _thumb_image = image
+            }
             thumbImage = _thumb_image
         }
         

@@ -66,7 +66,7 @@ class LoginManager: NSObject {
             } else {
                 if let user = user {
                     print("*** USER CREATED AND LOGGED IN: \(user.uid)")
-                    var userData = [MessageFields.username : email]
+                    var userData = [MessageFields.username : email.componentsSeparatedByString("@")[0] ?? email]
                     userData[MessageFields.authMethod] = "email"
                     BASE_REF.child(MessageFields.users).child(user.uid).setValue(userData, withCompletionBlock: { (error, dbRef) in
                         self.setDisplayName(user) {
@@ -81,7 +81,7 @@ class LoginManager: NSObject {
     private func setDisplayName(user: FIRUser, completionHandler handler: () -> ())
     {
         let changeRequest = user.profileChangeRequest()
-        changeRequest.displayName = user.email?.componentsSeparatedByString("@")[0] ?? "New User"
+        changeRequest.displayName = user.email?.componentsSeparatedByString("@")[0] ?? user.email
         changeRequest.commitChangesWithCompletion { error in
             guard error == nil else {
                 return

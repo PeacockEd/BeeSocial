@@ -68,7 +68,8 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     {
         self.navigationController?.navigationBar.topItem?.title = ""
         
-        refHandle = BASE_REF.child(MessageFields.posts).observeEventType(.Value, withBlock: { (snapshot) in
+        let query = BASE_REF.child(MessageFields.posts).queryOrderedByChild("timestamp")
+        refHandle = query.observeEventType(.Value, withBlock: { (snapshot) in
             self.postData = []
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for item in snapshots {
@@ -78,12 +79,14 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
                         self.postData.append(post)
                     }
                 }
+                self.postData = self.postData.reverse()
                 self.tableView.reloadData()
                 self.activityView.hidden = true
             }
         })
         
         if newUser {
+            newUser = false
             performSegueWithIdentifier(SEGUE_PROFILE_INFO, sender: nil)
         }
     }
@@ -134,6 +137,17 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private func sendMessage(post data:[String: AnyObject])
     {
         var messageData = data
+        
+        let date = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+        // let defaultTimeZoneStr = formatter.stringFromDate(date)
+        // : "2016-05-10 20:55:06 +0300" - Local (GMT +3)
+        formatter.timeZone = NSTimeZone(abbreviation: "UTC")
+        let utcTimeZoneStr = formatter.stringFromDate(date)
+        // : "2016-05-10 17:55:06 +0000" - UTC Time
+        messageData[MessageFields.timestamp] = utcTimeZoneStr
+        
         if let user = FIRAuth.auth()?.currentUser {
             if imageSelected && selectImageIcon.image != nil {
                 let thumbImage = AppUtils.generateThumbnailFromImage(selectImageIcon.image!, intoSize: POST_IMAGE_SIZE)

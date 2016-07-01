@@ -71,8 +71,10 @@ class ProfileSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINa
                             return
                         }
                         AppState.sharedInstance.displayName = name
-                        completionBlock?()
-                        print("UPDATE USER NAME")
+                        BASE_REF.child(MessageFields.users).child(user.uid).child(MessageFields.username).setValue(name, withCompletionBlock: { (error, dbRef) in
+                            completionBlock?()
+                            print("UPDATE USER NAME")
+                        })
                     }
                 } else {
                     print("NO USER NAME!")
