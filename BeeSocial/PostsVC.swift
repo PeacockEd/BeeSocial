@@ -60,6 +60,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
+        imagePicker.navigationBar.tintColor = nil
         
         settingsVC = ProfileSettingsVC()
     }

@@ -27,6 +27,7 @@ class ProfileSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINa
         super.viewDidLoad()
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
+        imagePicker.navigationBar.tintColor = nil
         
         profileImage.userInteractionEnabled = true
         let imageGesture = UITapGestureRecognizer(target: self, action: #selector(onImageTapped(_:)))
