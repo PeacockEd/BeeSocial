@@ -353,7 +353,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="PeacockEd254" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="But-wc-dc1">
-                                                                            <rect key="frame" x="132" y="0.0" width="118" height="50"/>
+                                                                            <rect key="frame" x="131.5" y="0.0" width="118" height="50"/>
                                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                                                             <color key="textColor" red="1" green="0.42745098039215684" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -368,13 +368,13 @@
                                                                             <rect key="frame" x="499" y="0.0" width="45" height="50"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="1567" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hLQ-Vn-kd6">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="26"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="26.5"/>
                                                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                                                                     <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" text="LIKES" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q83-S7-av5">
-                                                                                    <rect key="frame" x="0.0" y="24" width="45" height="26"/>
+                                                                                    <rect key="frame" x="0.0" y="24.5" width="45" height="25.5"/>
                                                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                                                     <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <nil key="highlightedColor"/>
@@ -407,16 +407,22 @@
                                                         <constraint firstItem="ff8-f3-vDa" firstAttribute="top" secondItem="q4D-tb-0aL" secondAttribute="topMargin" id="xrf-QN-NsJ"/>
                                                     </constraints>
                                                 </view>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="q7s-Jr-YFr">
+                                                    <rect key="frame" x="270" y="226.5" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="q4D-tb-0aL" firstAttribute="top" secondItem="irT-Tr-Tcx" secondAttribute="topMargin" id="6ya-lT-9aP"/>
                                                 <constraint firstItem="q4D-tb-0aL" firstAttribute="leading" secondItem="irT-Tr-Tcx" secondAttribute="leadingMargin" constant="-8" id="SVD-PZ-Pji"/>
                                                 <constraint firstItem="q4D-tb-0aL" firstAttribute="bottom" secondItem="irT-Tr-Tcx" secondAttribute="bottomMargin" id="dp4-i1-34N"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="q4D-tb-0aL" secondAttribute="trailing" constant="-8" id="luR-2J-Olb"/>
+                                                <constraint firstItem="q7s-Jr-YFr" firstAttribute="centerX" secondItem="irT-Tr-Tcx" secondAttribute="centerX" id="mvQ-9c-lRB"/>
+                                                <constraint firstItem="q7s-Jr-YFr" firstAttribute="centerY" secondItem="irT-Tr-Tcx" secondAttribute="centerY" constant="50" id="nIb-6e-AK4"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
+                                            <outlet property="cellIndicator" destination="q7s-Jr-YFr" id="yJ0-YH-UUb"/>
                                             <outlet property="descriptionTxt" destination="Nit-vF-DaW" id="9d0-AZ-aaA"/>
                                             <outlet property="likeImage" destination="Gcf-dM-nYh" id="roq-9h-z9T"/>
                                             <outlet property="likesLbl" destination="hLQ-Vn-kd6" id="xgu-3g-Bev"/>

@@ -172,6 +172,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
                         messageData[MessageFields.imageUrl] = BASE_STORAGE_REF.child((metadata?.path)!).description
                         BASE_REF.child(MessageFields.posts).childByAutoId().setValue(messageData, andPriority: nil, withCompletionBlock: self.onPostCommitted)
                         self.selectImageIcon.image = UIImage(named: "camera.png")
+                        self.imageSelected = false
                 }
             } else {
                 BASE_REF.child(MessageFields.posts).childByAutoId().setValue(messageData, andPriority: nil, withCompletionBlock: onPostCommitted)

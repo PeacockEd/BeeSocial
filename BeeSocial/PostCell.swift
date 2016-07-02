@@ -20,6 +20,7 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var likeImage:UIImageView!
     @IBOutlet weak var descriptionTxt: UITextView!
     @IBOutlet weak var likesLbl: UILabel!
+    @IBOutlet weak var cellIndicator: UIActivityIndicatorView!
     
     var post:PostItem?
     var request: Request?
@@ -34,6 +35,8 @@ class PostCell: UITableViewCell {
         let action = #selector(onTapLike(_:))
         let gesture = UITapGestureRecognizer(target: self, action: action)
         likeImage.addGestureRecognizer(gesture)
+        
+        cellIndicator.hidden = true
     }
     
     override func drawRect(rect: CGRect)
@@ -48,6 +51,8 @@ class PostCell: UITableViewCell {
         request?.cancel()
         gsReference?.cancel()
         postImage.image = nil
+        cellIndicator.hidden = true
+        cellIndicator.stopAnimating()
         
         self.post = post
         
@@ -73,6 +78,9 @@ class PostCell: UITableViewCell {
             if img != nil {
                 postImage.image = img
             } else {
+                cellIndicator.hidden = false
+                cellIndicator.startAnimating()
+                
                 if imageUrl.hasPrefix("gs://") {
                     self.gsReference = FIRStorage.storage().referenceForURL(imageUrl).dataWithMaxSize(INT64_MAX){ (data, error) in
                         if let error = error {
@@ -80,6 +88,8 @@ class PostCell: UITableViewCell {
                             return
                         }
                         self.postImage.image = UIImage.init(data: data!)
+                        self.cellIndicator.hidden = true
+                        self.cellIndicator.startAnimating()
                         PostsVC.postImagesCache.setObject(self.postImage.image!, forKey: post.imageUrl!)
                     }
                 } else {
@@ -91,6 +101,8 @@ class PostCell: UITableViewCell {
                         if let data = data,
                             image = UIImage(data: data) {
                             self.postImage.image = image
+                            self.cellIndicator.hidden = true
+                            self.cellIndicator.startAnimating()
                             PostsVC.postImagesCache.setObject(image, forKey: post.imageUrl!)
                         }
                     })
