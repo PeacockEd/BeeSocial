@@ -52,6 +52,7 @@ class PostCell: UITableViewCell {
         self.post = post
         
         if let user = FIRAuth.auth()?.currentUser?.uid {
+            // get liked status
             BASE_REF.child(MessageFields.users).child(user).child(MessageFields.likes).child(post.postId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
                 if let _ = snapshot.value as? NSNull {
                     self.likeImage.image = UIImage(named: "heart_no")
@@ -59,6 +60,9 @@ class PostCell: UITableViewCell {
                     self.likeImage.image = UIImage(named: "heart_yes")
                 }
             })
+            
+            // get profile image of original poster
+            //BASE_REF.child(post.)
         }
         
         descriptionTxt.text = post.postDescription

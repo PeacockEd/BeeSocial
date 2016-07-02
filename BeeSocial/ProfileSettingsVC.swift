@@ -100,7 +100,7 @@ class ProfileSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINa
                     
                     let filePath = "\(user.uid)/\(Int(NSDate.timeIntervalSinceReferenceDate() * 1000))/\(thumbPath!.lastPathComponent!)"
                     let metadata = FIRStorageMetadata()
-                    metadata.contentType = "image/jpeg"
+                    metadata.contentType = "image/*"
                     
                     BASE_STORAGE_REF.child(filePath)
                         .putFile(thumbPath!, metadata: metadata) { (metadata, error) in
