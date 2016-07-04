@@ -146,7 +146,7 @@ class ProfileSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINa
     
     @IBAction func onTapCancel(sender: AnyObject)
     {
-        
+        navigationController?.popViewControllerAnimated(true)
     }
 }
 

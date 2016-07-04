@@ -25,7 +25,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var postActivityView:UIActivityIndicatorView!
     
     private var refHandle:FIRDatabaseHandle?
-    static var postImagesCache = NSCache()
+    static var postDataCache = NSCache()
     
     private var settingsVC: ProfileSettingsVC!
     private var imageSelected = false
@@ -117,7 +117,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
             
             var image:UIImage?
             if let url = post.imageUrl {
-                image = PostsVC.postImagesCache.objectForKey(url) as? UIImage
+                image = PostsVC.postDataCache.objectForKey(url) as? UIImage
             }
             cell.configureCell(withPost: post, withImage: image)
             
@@ -150,6 +150,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         messageData[MessageFields.timestamp] = utcTimeZoneStr
         
         if let user = FIRAuth.auth()?.currentUser {
+            messageData[MessageFields.postedbyUserId] = user.uid
             if imageSelected && selectImageIcon.image != nil {
                 let thumbImage = AppUtils.generateThumbnailFromImage(selectImageIcon.image!, intoSize: POST_IMAGE_SIZE)
                 let thumbPath = AppUtils.saveImageToDocumentsAndReturnPath(thumbImage, withFilename: "\(Int(NSDate.timeIntervalSinceReferenceDate() * 1000))-asset.png")

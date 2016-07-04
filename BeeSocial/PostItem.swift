@@ -12,7 +12,7 @@ class PostItem {
     private var _postDescription:String!
     private var _imageUrl:String?
     private var _likes:Int!
-    private var _username:String!
+    private var _postedByUserId: String!
     private var _postId:String!
     
     var postDescription: String
@@ -27,12 +27,12 @@ class PostItem {
     
     var likes: Int
     {
-        return _likes
+        return _likes ?? 0
     }
     
-    var username: String
+    var postedByUserId: String
     {
-        return _username
+        return _postedByUserId
     }
     
     var postId: String
@@ -52,6 +52,9 @@ class PostItem {
         }
         if let description = data[MessageFields.description] as? String {
             self._postDescription = description
+        }
+        if let userId = data[MessageFields.postedbyUserId] as? String {
+            self._postedByUserId = userId
         }
     }
 }

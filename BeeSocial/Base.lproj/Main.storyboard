@@ -345,7 +345,7 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ixF-zI-Yih">
                                                                     <rect key="frame" x="0.0" y="0.0" width="544" height="50"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="nopic" translatesAutoresizingMaskIntoConstraints="NO" id="Rbr-Nc-vYa">
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="nopic" translatesAutoresizingMaskIntoConstraints="NO" id="Rbr-Nc-vYa">
                                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="50" id="J48-uh-5eb"/>
@@ -426,6 +426,7 @@
                                             <outlet property="descriptionTxt" destination="Nit-vF-DaW" id="9d0-AZ-aaA"/>
                                             <outlet property="likeImage" destination="Gcf-dM-nYh" id="roq-9h-z9T"/>
                                             <outlet property="likesLbl" destination="hLQ-Vn-kd6" id="xgu-3g-Bev"/>
+                                            <outlet property="postAuthorLbl" destination="But-wc-dc1" id="tBE-Kp-C8M"/>
                                             <outlet property="postImage" destination="Ydw-9I-Dg6" id="XcG-aK-qPb"/>
                                             <outlet property="profileImg" destination="Rbr-Nc-vYa" id="zb3-UF-m7l"/>
                                         </connections>

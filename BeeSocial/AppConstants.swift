@@ -21,6 +21,7 @@ struct MessageFields {
     static let imageUrl = "imageUrl"
     static let likes = "likes"
     static let username = "username"
+    static let postedbyUserId = "postedByUserId"
     static let authMethod = "auth-method"
     static let profileImgUrl = "profileImgUrl"
     static let timestamp = "timestamp"
@@ -35,8 +36,8 @@ struct NotificationKeys {
 let SHADOW_COLOR: CGFloat = 157.0 / 255.0
 
 // Settings values
-let PROFILE_THUMB_SIZE: CGSize = CGSizeMake(400.0, 400.0)
-let POST_IMAGE_SIZE: CGSize = CGSizeMake(800.00, 800.0)
+let PROFILE_THUMB_SIZE: CGSize = CGSizeMake(200.0, 200.0)
+let POST_IMAGE_SIZE: CGSize = CGSizeMake(600.00, 600.0)
 let PROFILE_IMAGE_FILE_SUFFIX = "-thumb.png"
 
 // Firebase Login Error Conditions
