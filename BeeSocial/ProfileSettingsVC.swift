@@ -68,17 +68,16 @@ class ProfileSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINa
                     changeRequest.displayName = name
                     changeRequest.commitChangesWithCompletion { error in
                         guard error == nil else {
-                            // TODO: Display error
+                            AppUtils.showErrorPromptInVC(self, withTitle: PROMPT_PROFILE_ERROR_TITLE, withMsg: PROMPT_PROFILE_ERROR_MSG, onDismissPrompt: nil)
                             return
                         }
                         AppState.sharedInstance.displayName = name
                         BASE_REF.child(MessageFields.users).child(user.uid).child(MessageFields.username).setValue(name, withCompletionBlock: { (error, dbRef) in
                             completionBlock?()
-                            print("UPDATE USER NAME")
                         })
                     }
                 } else {
-                    print("NO USER NAME!")
+                    // no user name?
                     completionBlock?()
                 }
             }
@@ -87,14 +86,14 @@ class ProfileSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINa
                 func uploadImage()
                 {
                     guard profileImage.image != nil else {
-                        // TODO Handle error
+                        AppUtils.showErrorPromptInVC(self, withTitle: PROMPT_IMAGE_ERROR_TITLE, withMsg: PROMPT_IMAGE_ERROR_MSG, onDismissPrompt: nil)
                         updateUsername()
                         return
                     }
                     let thumbPath = AppUtils.saveImageToDocumentsAndReturnPath(profileImage.image, withFilename: "\(user.uid)\(PROFILE_IMAGE_FILE_SUFFIX)")
                     
                     guard thumbPath != nil else {
-                        // TODO: Display error
+                        AppUtils.showErrorPromptInVC(self, withTitle: PROMPT_IMAGE_ERROR_TITLE, withMsg: PROMPT_IMAGE_ERROR_MSG, onDismissPrompt: nil)
                         updateUsername()
                         return
                     }
@@ -106,8 +105,8 @@ class ProfileSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINa
                     BASE_STORAGE_REF.child(filePath)
                         .putFile(thumbPath!, metadata: metadata) { (metadata, error) in
                             guard error == nil else {
-                                print("Error uploading image. \(error.debugDescription)")
-                                // TODO: Display error
+                                //print("Error uploading image. \(error.debugDescription)")
+                                AppUtils.showErrorPromptInVC(self, withTitle: PROMPT_IMAGE_ERROR_TITLE, withMsg: PROMPT_IMAGE_ERROR_MSG, onDismissPrompt: nil)
                                 updateUsername()
                                 return
                             }
@@ -131,10 +130,15 @@ class ProfileSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINa
                     }
                 })
             } else {
-                print("NO IMAGE!")
+                // no image selected
                 updateUsername()
             }
         }
+    }
+    
+    private func showMediaError()
+    {
+        AppUtils.showErrorPromptInVC(self, withTitle: PROMPT_MEDIA_ERROR_TITLE, withMsg: PROMPT_MEDIA_ERROR_MSG, onDismissPrompt: nil)
     }
     
     @IBAction func onTapSave(sender: AnyObject)
@@ -154,6 +158,7 @@ extension ProfileSettingsVC {
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
+        var mediaNotSupported: (() -> ())? = nil
         switch info[UIImagePickerControllerMediaType] as! NSString {
         case kUTTypeImage:
             if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
@@ -164,10 +169,9 @@ extension ProfileSettingsVC {
             }
             break
         default:
-            // display a friendly reminder that media (i.e. movies)
-            // other than images are not supported
+            mediaNotSupported = self.showMediaError
             break
         }
-        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+        imagePicker.dismissViewControllerAnimated(true, completion: mediaNotSupported)
     }
 }

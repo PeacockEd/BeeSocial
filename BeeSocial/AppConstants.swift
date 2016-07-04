@@ -56,3 +56,14 @@ typealias AuthResponse = AuthResult<Bool, Int>
 // Segues
 let SEGUE_LOGGED_IN = "segueLoggedIn"
 let SEGUE_PROFILE_INFO = "segueProfileInfo"
+
+// Error Prompt Strings
+let PROMPT_IMAGE_ERROR_TITLE = "Error Saving Image"
+let PROMPT_IMAGE_ERROR_MSG = "There was an unknown problem while attempting to send your image."
+let PROMPT_POST_ERROR_TITLE = "Error Creating New Post"
+let PROMPT_POST_ERROR_MSG = "There was an unknown problem while attempting to create your post."
+let PROMPT_MEDIA_ERROR_TITLE = "Media Not Supported"
+let PROMPT_MEDIA_ERROR_MSG = "Only images can be posted at this time. Please select an image to post!"
+let PROMPT_PROFILE_ERROR_TITLE = "Unable To Update Profile"
+let PROMPT_PROFILE_ERROR_MSG = "Updating of profile information was unsuccessful."
+

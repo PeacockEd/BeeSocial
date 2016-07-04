@@ -156,7 +156,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
                 let thumbPath = AppUtils.saveImageToDocumentsAndReturnPath(thumbImage, withFilename: "\(Int(NSDate.timeIntervalSinceReferenceDate() * 1000))-asset.png")
                 
                 guard thumbPath != nil else {
-                    // TODO display some error
+                    AppUtils.showErrorPromptInVC(self, withTitle: PROMPT_IMAGE_ERROR_TITLE, withMsg: PROMPT_IMAGE_ERROR_MSG, onDismissPrompt: nil)
                     return
                 }
                 
@@ -167,8 +167,8 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
                 BASE_STORAGE_REF.child(filePath)
                     .putFile(thumbPath!, metadata: metadata) { (metadata, error) in
                         guard error == nil else {
-                            print("Error uploading image. \(error.debugDescription)")
-                            // TODO: Display error
+                            //print("Error uploading image. \(error.debugDescription)")
+                            AppUtils.showErrorPromptInVC(self, withTitle: PROMPT_IMAGE_ERROR_TITLE, withMsg: PROMPT_IMAGE_ERROR_MSG, onDismissPrompt: nil)
                             return
                         }
                         messageData[MessageFields.imageUrl] = BASE_STORAGE_REF.child((metadata?.path)!).description
@@ -180,7 +180,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
                 BASE_REF.child(MessageFields.posts).childByAutoId().setValue(messageData, andPriority: nil, withCompletionBlock: onPostCommitted)
             }
         } else {
-            // TODO: display auth error
+            AppUtils.showErrorPromptInVC(self, withTitle: PROMPT_POST_ERROR_TITLE, withMsg: PROMPT_POST_ERROR_MSG, onDismissPrompt: nil)
         }
     }
     
@@ -189,7 +189,9 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         if error == nil, let user = FIRAuth.auth()?.currentUser?.uid {
             BASE_REF.child(MessageFields.users).child(user).child(MessageFields.posts).child(reference.key).setValue(true, andPriority: nil, withCompletionBlock: { (error, ref) in
                 guard error == nil else {
-                    // TODO: Display error
+                    // New post created, but unable to be 
+                    // associated with the user in the user's
+                    // posts array.
                     return
                 }
                 self.isPostingMessage = false
@@ -199,6 +201,11 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
                 self.postTextField.text = ""
             })
         }
+    }
+    
+    private func showMediaError()
+    {
+        AppUtils.showErrorPromptInVC(self, withTitle: PROMPT_MEDIA_ERROR_TITLE, withMsg: PROMPT_MEDIA_ERROR_MSG, onDismissPrompt: nil)
     }
     
     @IBAction func onTapLogout(sender: AnyObject)
@@ -235,6 +242,8 @@ extension PostsVC {
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
+        var mediaNotSupported: (() -> Void)? = nil
+        
         switch info[UIImagePickerControllerMediaType] as! NSString {
         case kUTTypeImage:
             if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
@@ -244,11 +253,10 @@ extension PostsVC {
             }
             break
         default:
-            // TODO: display a friendly reminder that media (i.e. movies)
-            // other than images are not supported
+            mediaNotSupported = self.showMediaError
             selectImageIcon.image = UIImage(named: "camera.png")
             break
         }
-        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+        imagePicker.dismissViewControllerAnimated(true, completion: mediaNotSupported)
     }
 }

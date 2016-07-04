@@ -86,4 +86,15 @@ class AppUtils {
         
         return thumbImage
     }
+    
+    static func showErrorPromptInVC(viewController: UIViewController, withTitle title:String, withMsg msg:String, onDismissPrompt: ((UIAlertAction) -> ())?)
+    {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .Alert)
+        let alertOkAction = UIAlertAction(title: "OK", style: .Default, handler: onDismissPrompt)
+        //let alertCancelAction = UIAlertAction(title: "Cancel", style: .Default, handler:onDismissPrompt)
+        alert.addAction(alertOkAction)
+        //alert.addAction(alertCancelAction)
+        
+        viewController.presentViewController(alert, animated: true, completion: nil)
+    }
 }
