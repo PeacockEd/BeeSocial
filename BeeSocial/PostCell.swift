@@ -59,8 +59,8 @@ class PostCell: UITableViewCell {
         resetCellContents()
         self.post = post
         
-        if let cachedLikeData = PostsVC.postDataCache.objectForKey("\(post.postId)-likes") as? Dictionary<String, Bool> {
-            if let value = cachedLikeData["postLiked"] where value == true {
+        if let cachedLikeData = PostsVC.postDataCache.objectForKey("\(post.postId)\(CachedDataKeys.likeKeyNameSuffix)") as? Dictionary<String, Bool> {
+            if let value = cachedLikeData[CachedDataKeys.postLiked] where value == true {
                 likeImage.image = UIImage(named: "heart_yes")
             } else {
                 likeImage.image = UIImage(named: "heart_no")
@@ -70,8 +70,7 @@ class PostCell: UITableViewCell {
         if let user = FIRAuth.auth()?.currentUser?.uid {
             // if user owns post, display delete image
             if user == post.postedByUserId {
-                print("userId:\(user) || postId:\(post.postedByUserId)")
-                deleteImage.hidden = true
+                deleteImage.hidden = false
             }
             
             var likeData = [String:Bool]()
@@ -79,18 +78,18 @@ class PostCell: UITableViewCell {
             BASE_REF.child(MessageFields.users).child(user).child(MessageFields.likes).child(post.postId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
                 if let _ = snapshot.value as? NSNull {
                     self.likeImage.image = UIImage(named: "heart_no")
-                    likeData["postLiked"] = false
+                    likeData[CachedDataKeys.postLiked] = false
                 } else {
                     self.likeImage.image = UIImage(named: "heart_yes")
-                    likeData["postLiked"] = true
+                    likeData[CachedDataKeys.postLiked] = true
                 }
-                PostsVC.postDataCache.setObject(likeData, forKey: "\(post.postId)-likes")
+                PostsVC.postDataCache.setObject(likeData, forKey: "\(post.postId)\(CachedDataKeys.likeKeyNameSuffix)")
             })
             
             // get profile name/image of the original author
             if let userData = PostsVC.postDataCache.objectForKey(post.postId) as? Dictionary<String, String>,
-                authorName = userData["authorName"],
-                authorImgUrl = userData["authorImgUrl"] {
+                authorName = userData[CachedDataKeys.authorName],
+                authorImgUrl = userData[CachedDataKeys.authorImgUrl] {
                 
                 self.postAuthorLbl.text = authorName
                 configureProfileImage(imageUrl: authorImgUrl, completion: { (img, error) in
@@ -106,10 +105,10 @@ class PostCell: UITableViewCell {
                             if let userDict = snapshot.value as? Dictionary<String, AnyObject> {
                                 if let username = userDict[MessageFields.username] as? String {
                                     self.postAuthorLbl.text = username
-                                    authorData["authorName"] = username
+                                    authorData[CachedDataKeys.authorName] = username
                                 }
                                 if let profileImgUrl = userDict[MessageFields.profileImgUrl] as? String {
-                                    authorData["authorImgUrl"] = profileImgUrl
+                                    authorData[CachedDataKeys.authorImgUrl] = profileImgUrl
                                     
                                     self.configureProfileImage(imageUrl: profileImgUrl, completion: { (img, error) in
                                         if error == nil {
@@ -242,7 +241,7 @@ class PostCell: UITableViewCell {
     private func resetCellContents()
     {
         cancelAllRequests()
-        deleteImage.hidden = false
+        deleteImage.hidden = true
         postAuthorLbl.text = ""
         cellIndicator.hidden = true
         cellIndicator.stopAnimating()

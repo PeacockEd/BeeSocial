@@ -13,6 +13,10 @@ import Firebase
 let BASE_REF = FIRDatabase.database().reference()
 let BASE_STORAGE_REF = FIRStorage.storage().referenceForURL("gs://project-1910258691540389069.appspot.com")
 
+// Data Types
+typealias AuthResponse = AuthResult<Bool, Int>
+
+
 // FireBase Key Names
 struct MessageFields {
     static let posts = "posts"
@@ -25,6 +29,14 @@ struct MessageFields {
     static let authMethod = "auth-method"
     static let profileImgUrl = "profileImgUrl"
     static let timestamp = "timestamp"
+}
+
+// Local Cache Keys
+struct CachedDataKeys {
+    static let postLiked = "postLiked"
+    static let authorName = "authorName"
+    static let authorImgUrl = "authorImgUrl"
+    static let likeKeyNameSuffix = "-likes"
 }
 
 // FireBase Notifications
@@ -49,9 +61,6 @@ let LOGIN_CREATE_USER_ERROR = -9254
 
 // Firebase Data Error Conditions
 let DATA_UNEXPECTED_FORMAT_ERROR = "dataUnexpectedFormatError"
-
-// Data Types
-typealias AuthResponse = AuthResult<Bool, Int>
 
 // Segues
 let SEGUE_LOGGED_IN = "segueLoggedIn"
