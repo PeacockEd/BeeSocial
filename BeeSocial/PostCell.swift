@@ -21,10 +21,13 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var likesLbl: UILabel!
     @IBOutlet weak var cellIndicator: UIActivityIndicatorView!
     @IBOutlet weak var postAuthorLbl: UILabel!
+    @IBOutlet weak var deleteImage: UIImageView!
+    
+    weak var delegate: DeletePostItemDelegate?
     
     var post:PostItem?
     private var requests = [AnyObject]()
-    
+    private var deleteGesture:UITapGestureRecognizer!
     
     override func awakeFromNib()
     {
@@ -35,7 +38,13 @@ class PostCell: UITableViewCell {
         let gesture = UITapGestureRecognizer(target: self, action: action)
         likeImage.addGestureRecognizer(gesture)
         
+        let deleteAction = #selector(onTapDelete(_:))
+        deleteGesture = UITapGestureRecognizer(target: self, action: deleteAction)
+        deleteImage.addGestureRecognizer(deleteGesture)
+        
         cellIndicator.hidden = true
+        deleteImage.hidden = true
+        deleteImage.userInteractionEnabled = true
     }
     
     override func drawRect(rect: CGRect)
@@ -59,6 +68,12 @@ class PostCell: UITableViewCell {
         }
         
         if let user = FIRAuth.auth()?.currentUser?.uid {
+            // if user owns post, display delete image
+            if user == post.postedByUserId {
+                print("userId:\(user) || postId:\(post.postedByUserId)")
+                deleteImage.hidden = true
+            }
+            
             var likeData = [String:Bool]()
             // get liked status
             BASE_REF.child(MessageFields.users).child(user).child(MessageFields.likes).child(post.postId).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
@@ -146,6 +161,13 @@ class PostCell: UITableViewCell {
         }
     }
     
+    @objc private func onTapDelete(sender: UITapGestureRecognizer)
+    {
+        if let post = post {
+            delegate?.deletePostItem(post.postId)
+        }
+    }
+    
     @objc private func onTapLike(sender: UITapGestureRecognizer)
     {
         if let post = self.post, user = FIRAuth.auth()?.currentUser?.uid {
@@ -220,7 +242,7 @@ class PostCell: UITableViewCell {
     private func resetCellContents()
     {
         cancelAllRequests()
-        
+        deleteImage.hidden = false
         postAuthorLbl.text = ""
         cellIndicator.hidden = true
         cellIndicator.stopAnimating()

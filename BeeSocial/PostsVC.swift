@@ -14,8 +14,13 @@ import FirebaseDatabase
 import FirebaseStorage
 
 
+protocol DeletePostItemDelegate: class {
+    func deletePostItem(postId: String)
+}
+
+
 class PostsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
-UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+UIImagePickerControllerDelegate, UINavigationControllerDelegate, DeletePostItemDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var postTextField: MaterialTextField!
@@ -120,6 +125,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
                 image = PostsVC.postDataCache.objectForKey(url) as? UIImage
             }
             cell.configureCell(withPost: post, withImage: image)
+            cell.delegate = self
             
             return cell
         } else {
@@ -189,7 +195,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         if error == nil, let user = FIRAuth.auth()?.currentUser?.uid {
             BASE_REF.child(MessageFields.users).child(user).child(MessageFields.posts).child(reference.key).setValue(true, andPriority: nil, withCompletionBlock: { (error, ref) in
                 guard error == nil else {
-                    // New post created, but unable to be 
+                    // New post created, but unable to be
                     // associated with the user in the user's
                     // posts array.
                     return
@@ -206,6 +212,13 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private func showMediaError()
     {
         AppUtils.showErrorPromptInVC(self, withTitle: PROMPT_MEDIA_ERROR_TITLE, withMsg: PROMPT_MEDIA_ERROR_MSG, onDismissPrompt: nil)
+    }
+    
+    private func onConfirmDeletePostItem(postId: String)
+    {
+        BASE_REF.child(MessageFields.posts).child(postId).removeValueWithCompletionBlock { (error, ref) in
+            // done!
+        }
     }
     
     @IBAction func onTapLogout(sender: AnyObject)
@@ -235,6 +248,17 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate {
             return
         }
         presentViewController(imagePicker, animated: true, completion: nil)
+    }
+}
+
+extension PostsVC {
+    
+    func deletePostItem(postId: String) {
+        AppUtils.showConfirmationPromptInVC(self, withTitle: "Delete Post", withMsg: "Are you sure you want to delete this post? This cannot be undone!") { action in
+            if let ok = action.title where ok == "OK" {
+                self.onConfirmDeletePostItem(postId)
+            }
+        }
     }
 }
 
