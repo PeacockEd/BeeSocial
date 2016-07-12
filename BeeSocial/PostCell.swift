@@ -87,6 +87,7 @@ class PostCell: UITableViewCell {
             })
             
             // get profile name/image of the original author
+            
             if let userData = PostsVC.postDataCache.objectForKey(post.postId) as? Dictionary<String, String>,
                 authorName = userData[CachedDataKeys.authorName],
                 authorImgUrl = userData[CachedDataKeys.authorImgUrl] {
@@ -113,6 +114,10 @@ class PostCell: UITableViewCell {
                                     self.configureProfileImage(imageUrl: profileImgUrl, completion: { (img, error) in
                                         if error == nil {
                                             self.profileImg.image = img
+                                            self.profileImg.alpha = 0.0
+                                            UIView.animateWithDuration(0.5, animations: {
+                                                self.profileImg.alpha = 1.0
+                                            })
                                         }
                                     })
                                 }
@@ -128,9 +133,13 @@ class PostCell: UITableViewCell {
         likesLbl.text = "\(post.likes)"
         
         if let imageUrl = post.imageUrl {
+            postImage.alpha = 0.0
             postImage.hidden = false
             if img != nil {
                 postImage.image = img
+                UIView.animateWithDuration(0.5, animations: { 
+                    self.postImage.alpha = 1.0
+                })
             } else {
                 cellIndicator.hidden = false
                 cellIndicator.startAnimating()
@@ -140,6 +149,9 @@ class PostCell: UITableViewCell {
                         self.postImage.image = img
                         self.cellIndicator.hidden = true
                         self.cellIndicator.stopAnimating()
+                        UIView.animateWithDuration(0.5, animations: {
+                            self.postImage.alpha = 1.0
+                        })
                     }
                 })
             }
